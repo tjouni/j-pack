@@ -26,7 +26,7 @@ The goal of this project is to create a java application that implements Huffman
   
 ### Goal time and space complexity (N = file length)
 
-  * Huffman codes implemented in O(N) time
+  * Huffman codes implemented in O(N log N) time
   * LZ77 probably depends on string matching? or O(N) with large constant coefficients?
     * Searching for matches in window is probably the bottleneck
     
