@@ -24,13 +24,17 @@ The goal of this project is to create a java application that implements Huffman
   * Output: compressed/decompressed file
   
   
-### Goal time and space complexity (N = file length)
+### Goal time complexity (N = file length)
 
   * Huffman codes implemented in O(N log N) time
   * LZ77 probably depends on string matching? or O(N) with large constant coefficients?
     * Searching for matches in window is probably the bottleneck
     
   * Decompression in O(N) time
+  
+### Goal space complexity (N = file length)
+
+  * O(N) space complexity. File size is limited because all operations are done in memory.
   
   
 ### Sources
@@ -39,6 +43,7 @@ The goal of this project is to create a java application that implements Huffman
     * Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2009). Introduction to algorithms. MIT press.
   * LZ77:
     * [Wikipedia](https://en.wikipedia.org/wiki/LZ77_and_LZ78)
+    * [LEMPEL-ZIV SLIDING WINDOW UNIVERSAL COMPRESSION](http://mit.edu/6.441/spring06/handout/sup/6.441_LZ_77_-_Notes_2b.doc)
   * DEFLATE:
     * [RFC 1951](https://www.ietf.org/rfc/rfc1951.txt)
 
