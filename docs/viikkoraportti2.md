@@ -7,11 +7,14 @@ Aikaa käytetty 13h.
   * Toteutettu ohjelmaan IO-luokka tiedostojen lukemista ja kirjoittamista varten
   * Toteutettu alustava LZ77-algoritmi, joka on tällä hetkellä vielä aika hidas
     * Pakkaa testitiedoston 1.62 ratiolla (n. 38%)
+  * Aloitettu myös testien kirjoittaminen sitä mukaa kun luokkia tulee lisää
   * Paikkailtu puutteita määrittelydokumentista
 
 ### Miten ohjelma on edistynyt?
 
 Ihan hyvin mielestäni. Sain tehtyä sen mitä ajattelinkin tällä viikolla tehdä. Huomasin, että ohjelma tarvii myös dynaamisen listan tavuja varten. Lisäsin sen määrittelydokumenttiin tietorakenteiden kohdalle.
+
+Ohjelman voi nyt suorittaa, ja se pakkaa ja purkaa projektin juuressa olevan test-input.txt -tiedoston.
 
 ### Mitä opin tällä viikolla / tänään?
 
