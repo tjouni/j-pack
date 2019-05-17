@@ -10,6 +10,7 @@ The goal of this project is to create a java application that implements Huffman
     * Minimum heap for building the tree
   * LZ77
     * Something for string matching possibly?
+  * Dynamic byte array
     
     
 ### Problem definition
