@@ -1,5 +1,8 @@
 .gradle
 .idea
+*.jpack
+*.backup
+unpacked-test-file.txt
 
 /build/
 
