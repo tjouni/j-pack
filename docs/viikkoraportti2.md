@@ -12,7 +12,7 @@ Aikaa käytetty 13h.
 
 ### Miten ohjelma on edistynyt?
 
-Ihan hyvin mielestäni. Sain tehtyä sen mitä ajattelinkin tällä viikolla tehdä. Huomasin, että ohjelma tarvii myös dynaamisen listan tavuja varten. Lisäsin sen määrittelydokumenttiin tietorakenteiden kohdalle.
+Ihan hyvin mielestäni. Sain tehtyä sen mitä ajattelinkin tällä viikolla tehdä. Huomasin, että ohjelma tarvii myös dynaamisen taulukon tavuja varten. Lisäsin sen määrittelydokumenttiin tietorakenteiden kohdalle. Tällä hetkellä käytän Javan ArrayListiä.
 
 Ohjelman voi nyt suorittaa, ja se pakkaa ja purkaa projektin juuressa olevan test-input.txt -tiedoston.
 
