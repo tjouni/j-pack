@@ -1,9 +1,9 @@
 package jpack;
+import datastructure.ByteList;
 import jpack.domain.LZ77Compress;
 import jpack.domain.LZ77Decompress;
 import jpack.io.FileIO;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Main {
 
@@ -21,14 +21,14 @@ public class Main {
         Long compressionStartTime = System.currentTimeMillis();
 
         LZ77Compress lz77compress = new LZ77Compress(fileBytes, WINDOW_SIZE);
-        ArrayList<Byte> compressedBytes = lz77compress.compress();
-        //fileIO.writeFileBytes("test-file.txt.jpack", compressedBytes);
+        ByteList compressedBytes = lz77compress.compress();
+        fileIO.writeFileBytes("test-file.txt.jpack", compressedBytes);
 
         Long compressionEndTime = System.currentTimeMillis();
         Long decompressionStartTime = System.currentTimeMillis();
 
         LZ77Decompress lz77Decompress = new LZ77Decompress(compressedBytes, WINDOW_SIZE);
-        ArrayList<Byte> decompressedBytes = lz77Decompress.decompress();
+        ByteList decompressedBytes = lz77Decompress.decompress();
 
         Long decompressionEndTime = System.currentTimeMillis();
 
@@ -36,11 +36,9 @@ public class Main {
 
         System.out.println("original file size: " + fileBytes.length + "B");
         System.out.println("compressed file size: " + compressedBytes.size() + "B");
-        double compression = Math.max(0, 100 - (compressedBytes.size() * 1.0 / fileBytes.length * 100));
-        System.out.println("compression: " + String.format("%.1f", compression) + "%");
+        double compressionRatio = (double)fileBytes.length / (double)compressedBytes.size();
+        System.out.println("compression ratio: " + String.format("%.2f", compressionRatio));
         System.out.println("compression time: " + (compressionEndTime - compressionStartTime) + "ms");
         System.out.println("decompression time: " + (decompressionEndTime - decompressionStartTime) + "ms");
-
-
     }
 }

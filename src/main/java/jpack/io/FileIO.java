@@ -1,10 +1,11 @@
 package jpack.io;
 
+import datastructure.ByteList;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
 
 public class FileIO {
 
@@ -26,7 +27,8 @@ public class FileIO {
      * @param compressedBytes a Byte ArrayList representation of the compressed file
      * @throws IOException
      */
-    public void writeFileBytes(String filePath, ArrayList<Byte> compressedBytes) throws IOException {
+    public void writeFileBytes(String filePath, ByteList compressedBytes) throws IOException {
+    //public void writeFileBytes(String filePath, ArrayList<Byte> compressedBytes) throws IOException {
         int bytes = compressedBytes.size();
         byte[] fileBytes = new byte[bytes];
         for (int i = 0; i < bytes; i++) {

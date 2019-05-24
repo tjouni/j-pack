@@ -1,11 +1,11 @@
 package jpack.domain;
 
-import java.util.ArrayList;
+import datastructure.ByteList;
 
 public class LZ77Decompress {
 
-    private ArrayList<Byte> compressedBytes;
-    private ArrayList<Byte> fileBytes;
+    private ByteList compressedBytes;
+    private ByteList fileBytes;
 
     private int originalFileLength;
     private int compressedFileLength;
@@ -15,22 +15,22 @@ public class LZ77Decompress {
 
     /**
      * Constructor class for LZ77Decompress
-     * @param compressedBytes A Byte ArrayList representation of the compressed file
+     * @param compressedBytes A ByteList representation of the compressed file
      * @param WINDOW_SIZE Size of lookback window
      */
-    public LZ77Decompress(ArrayList<Byte> compressedBytes, int WINDOW_SIZE) {
+    public LZ77Decompress(ByteList compressedBytes, int WINDOW_SIZE) {
         this.WINDOW_SIZE = WINDOW_SIZE;
         this.compressedBytes = compressedBytes;
         this.compressedFileLength = compressedBytes.size();
         setFileLength();
-        this.fileBytes = new ArrayList<>();
+        this.fileBytes = new ByteList();
     }
 
     /**
      * Decompress the LZ77 compressed file
-     * @return A Byte ArrayList representation of the uncompressed file
+     * @return a ByteList representation of the uncompressed file
      */
-    public ArrayList<Byte> decompress() {
+    public ByteList decompress() {
         readFileBeginning();
 
         for (int readIndex = HEADER_SIZE + WINDOW_SIZE; readIndex < compressedFileLength; readIndex += 3) {

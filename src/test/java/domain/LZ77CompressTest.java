@@ -1,11 +1,9 @@
 package domain;
 
+import datastructure.ByteList;
 import jpack.domain.LZ77Compress;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.Random;
 
 
 public class LZ77CompressTest {
@@ -17,7 +15,7 @@ public class LZ77CompressTest {
             testArray[i] = (byte)i;
         }
         LZ77Compress testCompress = new LZ77Compress(testArray, 4096);
-        ArrayList<Byte> testList = testCompress.compress();
+        ByteList testList = testCompress.compress();
         assertEquals(testArray.length + 4, testList.size());
     }
 
@@ -25,7 +23,7 @@ public class LZ77CompressTest {
     public void emptyFileCompressionTest() {
         byte[] testArray = new byte[0];
         LZ77Compress testCompress = new LZ77Compress(testArray, 4096);
-        ArrayList<Byte> testList = testCompress.compress();
+        ByteList testList = testCompress.compress();
         assertEquals(testArray.length + 4, testList.size());
     }
 
@@ -37,7 +35,7 @@ public class LZ77CompressTest {
             testArray[i] = (byte)i;
         }
         LZ77Compress testCompress = new LZ77Compress(testArray, 4096);
-        ArrayList<Byte> testList = testCompress.compress();
+        ByteList testList = testCompress.compress();
         assertTrue(testList.size() < testArray.length + 4);
     }
 
