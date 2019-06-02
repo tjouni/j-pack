@@ -6,5 +6,5 @@ LZ77 is currently implemented with a lookback window of size 4096 and a lookahea
 
 ### Huffman codes
 
-Huffman code implementation is a work in progress. Currently implemented parts are the HuffmannTree and HuffmanNode classes for building Huffmann code trees, and basic methods for compression with Huffman Codes.
+Huffman code implementation is a work in progress. Currently implemented parts are the HuffmannTree and HuffmanNode classes for building Huffman code trees, and basic methods for compression with Huffman Codes.
 
