@@ -1,5 +1,5 @@
 package jpack;
-import datastructure.ByteList;
+import util.ByteList;
 import jpack.domain.LZ77Compress;
 import jpack.domain.LZ77Decompress;
 import jpack.io.FileIO;

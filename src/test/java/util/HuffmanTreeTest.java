@@ -1,4 +1,4 @@
-package datastructure;
+package util;
 
 import org.junit.Test;
 

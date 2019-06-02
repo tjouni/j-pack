@@ -1,6 +1,6 @@
 package domain;
 
-import datastructure.ByteList;
+import util.ByteList;
 import jpack.domain.LZ77Compress;
 import org.junit.Test;
 import static org.junit.Assert.*;

@@ -1,6 +1,6 @@
 package jpack.domain;
 
-import datastructure.ByteList;
+import util.ByteList;
 
 public class LZ77Compress {
 

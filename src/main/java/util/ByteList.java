@@ -1,4 +1,4 @@
-package datastructure;
+package util;
 
 /**
  * A dynamically sized list of bytes, implemented with a byte[] array

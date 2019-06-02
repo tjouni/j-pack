@@ -1,4 +1,4 @@
-package datastructure;
+package util;
 
 /**
  * a Huffman code node object
@@ -11,7 +11,7 @@ public class HuffmanNode implements Comparable<HuffmanNode>{
     private boolean leaf;
 
     /**
-     * Construct a HuffmanNode object
+     * Construct a HuffmanNode object, node is a leaf if both children are null
      * @param uncodedByte
      * @param frequency
      * @param leftChild
@@ -22,8 +22,7 @@ public class HuffmanNode implements Comparable<HuffmanNode>{
         this.frequency = frequency;
         this.leftChild = leftChild;
         this.rightChild = rightChild;
-        if (leftChild == null && rightChild == null) leaf = true;
-        else leaf = false;
+        leaf = (leftChild == null && rightChild == null);
     }
 
     public int getFrequency() {
@@ -36,6 +35,10 @@ public class HuffmanNode implements Comparable<HuffmanNode>{
 
     public HuffmanNode getRightChild() {
         return rightChild;
+    }
+
+    public Byte getUncodedByte() {
+        return uncodedByte;
     }
 
     /**

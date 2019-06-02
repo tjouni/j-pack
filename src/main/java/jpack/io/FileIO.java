@@ -1,6 +1,6 @@
 package jpack.io;
 
-import datastructure.ByteList;
+import util.ByteList;
 
 import java.io.File;
 import java.io.FileOutputStream;
