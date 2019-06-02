@@ -42,6 +42,7 @@ The goal of this project is to create a java application that implements Huffman
 
   * Huffman codes & minimum heap :
     * Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2009). Introduction to algorithms. MIT press.
+    * Sedgewick, R., & Wayne, K. (2011). Algorithms. Addison-Wesley Professional.
   * LZ77:
     * [Wikipedia](https://en.wikipedia.org/wiki/LZ77_and_LZ78)
     * [LEMPEL-ZIV SLIDING WINDOW UNIVERSAL COMPRESSION](http://mit.edu/6.441/spring06/handout/sup/6.441_LZ_77_-_Notes_2b.doc)
