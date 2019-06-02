@@ -11,6 +11,10 @@ public class HuffmanCompress {
     private String[] codes;
     private ByteList lz77Bytes;
 
+    /**
+     * Construct a new HuffmanCompress object. Generate Huffman code tree and code map
+     * @param lz77Bytes
+     */
     public HuffmanCompress(ByteList lz77Bytes) {
         this.lz77Bytes = lz77Bytes;
         codes = new String[256];
@@ -20,6 +24,11 @@ public class HuffmanCompress {
         generateCodes(root, "");
     }
 
+    /**
+     * Get frequencies for all bytes in a ByteList object
+     * @param bytes
+     * @return int array indexed by byte value + 128, value is frequency
+     */
     private int[] getFrequencies(ByteList bytes) {
         frequencies = new int[256];
         for (int i = 0; i < bytes.size(); i++) {
@@ -28,6 +37,11 @@ public class HuffmanCompress {
         return frequencies;
     }
 
+    /**
+     * Recursively generate Huffman codes from a Huffman tree
+     * @param node root of the HuffmanTree object
+     * @param code empty String object
+     */
     private void generateCodes(HuffmanNode node, String code) {
         if (node.isLeaf()) {
             codes[node.getUncodedByte() + 128] = code;
@@ -38,6 +52,10 @@ public class HuffmanCompress {
         }
     }
 
+    /**
+     * Get a compressed byte array generated from lz77bytes
+     * @return
+     */
     private byte[] getWriteBytes() {
         BitSet writeBits = new BitSet();
         int bitPosition = 0;
