@@ -3,35 +3,27 @@ package jpack.domain;
 import util.ByteList;
 
 public class LZ77Decompress {
-
-    private ByteList compressedBytes;
-    private ByteList fileBytes;
-
-    private int originalFileLength;
-    private int compressedFileLength;
-
     private static int WINDOW_SIZE;
     private static final int HEADER_SIZE = 4;
 
     /**
      * Constructor class for LZ77Decompress
-     * @param compressedBytes A ByteList representation of the compressed file
      * @param WINDOW_SIZE Size of lookback window
      */
-    public LZ77Decompress(ByteList compressedBytes, int WINDOW_SIZE) {
+    public LZ77Decompress(int WINDOW_SIZE) {
         this.WINDOW_SIZE = WINDOW_SIZE;
-        this.compressedBytes = compressedBytes;
-        this.compressedFileLength = compressedBytes.size();
-        setFileLength();
-        this.fileBytes = new ByteList();
     }
 
     /**
      * Decompress the LZ77 compressed file
+     * @param compressedBytes A ByteList representation of the compressed file
      * @return a ByteList representation of the uncompressed file
      */
-    public ByteList decompress() {
-        readFileBeginning();
+    public ByteList decompress(ByteList compressedBytes) {
+        int compressedFileLength = compressedBytes.size();
+        ByteList fileBytes = new ByteList();
+
+        readFileBeginning(compressedBytes, fileBytes);
 
         for (int readIndex = HEADER_SIZE + WINDOW_SIZE; readIndex < compressedFileLength; readIndex += 3) {
             int byte0 = compressedBytes.get(readIndex);
@@ -58,17 +50,18 @@ public class LZ77Decompress {
     /**
      * Set originalFileLength to the value represented by the first 4 bytes of the file
      */
-    private void setFileLength() {
-        originalFileLength = compressedBytes.get(0) << 24 | (compressedBytes.get(1) & 0xFF) << 16 | (compressedBytes.get(2) & 0xFF) << 8 | (compressedBytes.get(3) & 0xFF);
+    private int getFileLength(ByteList compressedBytes) {
+        return compressedBytes.get(0) << 24 | (compressedBytes.get(1) & 0xFF) << 16 | (compressedBytes.get(2) & 0xFF) << 8 | (compressedBytes.get(3) & 0xFF);
     }
 
     /**
-     * Read the next WINDOW_SIZE bytes after the 4 byte header into the ArrayList
+     * Read the next WINDOW_SIZE bytes after the 4 byte header into a ByteList object
      */
-    private void readFileBeginning() {
+    private void readFileBeginning(ByteList compressedBytes, ByteList decompressedBytes) {
+        int originalFileLength = getFileLength(compressedBytes);
         int stopIndex = Math.min(HEADER_SIZE + originalFileLength, HEADER_SIZE + WINDOW_SIZE);
         for (int i = HEADER_SIZE; i < stopIndex; i++) {
-            fileBytes.add(compressedBytes.get(i));
+            decompressedBytes.add(compressedBytes.get(i));
         }
     }
 }

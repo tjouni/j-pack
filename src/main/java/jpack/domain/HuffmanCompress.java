@@ -1,27 +1,48 @@
 package jpack.domain;
 
+import util.BitList;
 import util.ByteList;
 import util.HuffmanNode;
 import util.HuffmanTree;
 
-import java.util.BitSet;
+import java.util.Arrays;
+
 
 public class HuffmanCompress {
-    private int[] frequencies;
-    private String[] codes;
-    private ByteList lz77Bytes;
+
+    public HuffmanCompress() {
+
+    }
 
     /**
-     * Construct a new HuffmanCompress object. Generate Huffman code tree and code map
-     * @param lz77Bytes
+     * Compress a ByteList object with Huffman coding
+     * @return
      */
-    public HuffmanCompress(ByteList lz77Bytes) {
-        this.lz77Bytes = lz77Bytes;
-        codes = new String[256];
-        frequencies = getFrequencies(lz77Bytes);
-        HuffmanTree huffmanTree = new HuffmanTree(frequencies);
-        HuffmanNode root = huffmanTree.getRoot();
-        generateCodes(root, "");
+    public byte[] compress(ByteList lz77Bytes) {
+        String[] codes = new String[256];
+
+        int[] frequencies = getFrequencies(lz77Bytes);
+        BitList huffmanBits = new BitList();
+
+        HuffmanTree tree = new HuffmanTree(frequencies);
+
+        HuffmanNode root = tree.getRoot();
+        generateCodes(root, "", codes);
+
+        // Save space for header
+        huffmanBits.writeByte((byte) 0);
+
+        tree.write(huffmanBits, root);
+        writeCompressedBits(huffmanBits, lz77Bytes, codes);
+
+        writeHeader(huffmanBits);
+
+        Arrays.sort(frequencies);
+        for (int i : frequencies) {
+            //System.out.println(i);
+        }
+
+        return huffmanBits.toByteArray();
     }
 
     /**
@@ -30,7 +51,7 @@ public class HuffmanCompress {
      * @return int array indexed by byte value + 128, value is frequency
      */
     private int[] getFrequencies(ByteList bytes) {
-        frequencies = new int[256];
+        int[] frequencies = new int[256];
         for (int i = 0; i < bytes.size(); i++) {
             frequencies[bytes.get(i) + 128]++;
         }
@@ -42,32 +63,38 @@ public class HuffmanCompress {
      * @param node root of the HuffmanTree object
      * @param code empty String object
      */
-    private void generateCodes(HuffmanNode node, String code) {
+    private void generateCodes(HuffmanNode node, String code, String[] codes) {
         if (node.isLeaf()) {
             codes[node.getUncodedByte() + 128] = code;
         }
         else {
-            generateCodes(node.getLeftChild(), code + "0");
-            generateCodes(node.getLeftChild(), code + "1");
+            generateCodes(node.getLeftChild(), code + "0", codes);
+            generateCodes(node.getRightChild(), code + "1", codes);
         }
     }
 
     /**
-     * Get a compressed byte array generated from lz77bytes
-     * @return
+     * Write Huffman compressed bits on a BitList object
+     * @param bits
+     * @param lz77Bytes
+     * @param codes
      */
-    private byte[] getWriteBytes() {
-        BitSet writeBits = new BitSet();
-        int bitPosition = 0;
+    private void writeCompressedBits(BitList bits, ByteList lz77Bytes, String[] codes) {
         for (int i = 0; i < lz77Bytes.size(); i++) {
-            String code = codes[lz77Bytes.get(i)];
+            String code = codes[lz77Bytes.get(i) + 128];
             for (int j = 0; j < code.length(); j++) {
                 if (code.charAt(j) == '1') {
-                    writeBits.set(bitPosition);
+                    bits.add(true);
+                } else {
+                    bits.add(false);
                 }
-                bitPosition++;
             }
         }
-        return writeBits.toByteArray();
     }
+
+    private void writeHeader(BitList bits) {
+        byte b0 = bits.getLastByteBits();
+        bits.setByte(0, b0);
+    }
+
 }

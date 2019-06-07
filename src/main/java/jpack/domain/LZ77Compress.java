@@ -3,32 +3,29 @@ package jpack.domain;
 import util.ByteList;
 
 public class LZ77Compress {
-
-    private ByteList compressedBytes;
-    private byte[] fileBytes;
     private int lookaheadSize = 15;
     private int WINDOW_SIZE;
 
-    public LZ77Compress(byte[] fileBytes, int WINDOW_SIZE) {
+    public LZ77Compress(int WINDOW_SIZE) {
         this.WINDOW_SIZE = WINDOW_SIZE;
-        this.fileBytes = fileBytes;
-        this.compressedBytes = new ByteList();
     }
 
     /**
      * Compress a byte array using LZ77. First four bytes is the file size in bytes. Next WINDOW_SIZE bytes is
      * uncompressed data. If the file is shorter than the window, only the header and uncompressed data are written.
+     * @param fileBytes
      * @return a LZ77 compressed ByteList object
      */
-    public ByteList compress() {
+    public ByteList compress(byte[] fileBytes) {
         int fileLength = fileBytes.length;
+        ByteList compressedBytes = new ByteList();
 
-        writeFileBeginning(fileLength);
+        writeFileBeginning(fileBytes, compressedBytes);
 
         for (int readPosition = WINDOW_SIZE; readPosition < fileLength; readPosition++) {
             lookaheadSize = Math.min(lookaheadSize, fileLength - readPosition);
 
-            short[] blockParameters = findPrefix(lookaheadSize, readPosition);
+            short[] blockParameters = findPrefix(lookaheadSize, readPosition, fileBytes);
             if (blockParameters[1] > 1) readPosition += blockParameters[1];
 
             byte[] writeBytes = getWriteBytes(blockParameters);
@@ -45,10 +42,13 @@ public class LZ77Compress {
 
     /**
      * Write the first 4 + WINDOW_SIZE bytes
-     * @param fileLength
+     * @param fileBytes
+     * @param compressedBytes
      */
-    private void writeFileBeginning(int fileLength) {
-        writeFileLength(fileBytes.length);
+    private void writeFileBeginning(byte[] fileBytes, ByteList compressedBytes) {
+        int fileLength = fileBytes.length;
+
+        writeFileLength(fileLength, compressedBytes);
 
         int stopIndex = Math.min(fileLength, WINDOW_SIZE);
 
@@ -60,8 +60,9 @@ public class LZ77Compress {
     /**
      * Write the first 4 bytes (original file length in bytes)
      * @param fileLength
+     * @param compressedBytes
      */
-    private void writeFileLength(int fileLength) {
+    private void writeFileLength(int fileLength, ByteList compressedBytes) {
         compressedBytes.add((byte) (fileLength >> 24));
         compressedBytes.add((byte) (fileLength >> 16));
         compressedBytes.add((byte) (fileLength >> 8));
@@ -93,12 +94,12 @@ public class LZ77Compress {
     }
 
     /**
-     * Find a long enough (2/3 lookahead buffer size) prefix match
+     * Find a long enough (2/3 lookahead buffer size) prefix match.
      * @param lookaheadSize size of the lookahead buffer
      * @param readPosition current read position of file
-     * @return short[] array with the block offset and length at indexes 0 and 1, respectively
+     * @return short[] array with the block offset and length at indexes 0 and 1, respectively. Empty array if block length <= 1
      */
-    private short[] findPrefix(int lookaheadSize, int readPosition) {
+    private short[] findPrefix(int lookaheadSize, int readPosition, byte[] fileBytes) {
         short blockLength = 0;
         short blockOffset = 0;
 
@@ -112,11 +113,14 @@ public class LZ77Compress {
                 blockOffset = offset;
             }
             if (blockLength >= lookaheadSize * 2 / 3) {
-                break;
+                //break;
             }
         }
-
-        short[] offsetAndLength = {blockOffset, blockLength};
+        short[] offsetAndLength = new short[2];
+        if (blockLength > 1) {
+            offsetAndLength[0] = blockOffset;
+            offsetAndLength[1] = blockLength;
+        }
 
         return offsetAndLength;
     }
