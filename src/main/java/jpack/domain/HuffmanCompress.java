@@ -27,7 +27,9 @@ public class HuffmanCompress {
         HuffmanTree tree = new HuffmanTree(frequencies);
 
         HuffmanNode root = tree.getRoot();
-        generateCodes(root, "", codes);
+        String startCode = "";
+        //if (root.isLeaf()) startCode += "1";
+        generateCodes(root, startCode, codes);
 
         // Save space for header
         huffmanBits.writeByte((byte) 0);
