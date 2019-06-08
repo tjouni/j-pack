@@ -17,7 +17,7 @@ public class HuffmanDecompressTest {
         for (int i = 0; i < 1000000; i++) {
             testList.add((byte) 5);
         }
-        //testList.add((byte) 1);
+        testList.add((byte) 1);
         byte[] compressedArray = testCompress.compress(testList);
         ByteList decompressedList = testDecompress.decompress(compressedArray);
         assertEquals(decompressedList.size(), testList.size());
