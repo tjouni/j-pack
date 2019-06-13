@@ -18,7 +18,7 @@ public class HuffmanDecompressTest {
             testList.add((byte) 5);
         }
         testList.add((byte) 1);
-        byte[] compressedArray = testCompress.compress(testList);
+        byte[] compressedArray = testCompress.compress(testList, false);
         ByteList decompressedList = testDecompress.decompress(compressedArray);
         assertEquals(decompressedList.size(), testList.size());
     }
@@ -32,7 +32,7 @@ public class HuffmanDecompressTest {
             testList.add((byte) 0);
         }
         testList.add((byte) 1);
-        byte[] compressedArray = testCompress.compress(testList);
+        byte[] compressedArray = testCompress.compress(testList, false);
         ByteList decompressedList = testDecompress.decompress(compressedArray);
         for (int i = 0; i < decompressedList.size(); i++) {
             assertEquals(testList.get(i), decompressedList.get(i));

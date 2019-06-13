@@ -15,7 +15,7 @@ public class HuffmanCompressTest {
         for (int i = 0; i < 1000000; i++) {
             testList.add((byte) 0);
         }
-        byte[] compressedArray = testCompress.compress(testList);
+        byte[] compressedArray = testCompress.compress(testList, false);
 
         assertTrue(compressedArray.length < testList.size());
     }
@@ -27,7 +27,7 @@ public class HuffmanCompressTest {
         for (int i = 0; i < 1000000; i++) {
             testList.add((byte) (i%20));
         }
-        byte[] compressedArray = testCompress.compress(testList);
+        byte[] compressedArray = testCompress.compress(testList, false);
 
         assertTrue(compressedArray.length < testList.size());
     }
@@ -42,7 +42,7 @@ public class HuffmanCompressTest {
         for (int i = 0; i < 1000000; i++) {
             testList.add((byte) (i%10));
         }
-        byte[] compressedArray = testCompress.compress(testList);
+        byte[] compressedArray = testCompress.compress(testList, false);
 
         assertTrue(compressedArray.length < testList.size());
     }

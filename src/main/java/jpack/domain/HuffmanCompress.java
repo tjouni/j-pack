@@ -18,10 +18,10 @@ public class HuffmanCompress {
      * Compress a ByteList object with Huffman coding
      * @return
      */
-    public byte[] compress(ByteList lz77Bytes) {
+    public byte[] compress(ByteList uncompressed, Boolean lz77) {
         String[] codes = new String[256];
 
-        int[] frequencies = getFrequencies(lz77Bytes);
+        int[] frequencies = getFrequencies(uncompressed);
         BitList huffmanBits = new BitList();
 
         HuffmanTree tree = new HuffmanTree(frequencies);
@@ -32,17 +32,13 @@ public class HuffmanCompress {
         generateCodes(root, startCode, codes);
 
         // Save space for header
+        huffmanBits.add(lz77);
         huffmanBits.writeByte((byte) 0);
 
         tree.write(huffmanBits, root);
-        writeCompressedBits(huffmanBits, lz77Bytes, codes);
+        writeCompressedBits(huffmanBits, uncompressed, codes);
 
         writeHeader(huffmanBits);
-
-        Arrays.sort(frequencies);
-        for (int i : frequencies) {
-            //System.out.println(i);
-        }
 
         return huffmanBits.toByteArray();
     }
@@ -78,12 +74,12 @@ public class HuffmanCompress {
     /**
      * Write Huffman compressed bits on a BitList object
      * @param bits
-     * @param lz77Bytes
+     * @param uncompressed
      * @param codes
      */
-    private void writeCompressedBits(BitList bits, ByteList lz77Bytes, String[] codes) {
-        for (int i = 0; i < lz77Bytes.size(); i++) {
-            String code = codes[lz77Bytes.get(i) + 128];
+    private void writeCompressedBits(BitList bits, ByteList uncompressed, String[] codes) {
+        for (int i = 0; i < uncompressed.size(); i++) {
+            String code = codes[uncompressed.get(i) + 128];
             for (int j = 0; j < code.length(); j++) {
                 if (code.charAt(j) == '1') {
                     bits.add(true);
@@ -95,7 +91,7 @@ public class HuffmanCompress {
     }
 
     private void writeHeader(BitList bits) {
-        byte b0 = bits.getLastByteBits();
+        byte b0 = (byte) (bits.getLastByteBits() | bits.getByte(0));
         bits.setByte(0, b0);
     }
 

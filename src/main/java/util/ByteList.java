@@ -18,6 +18,16 @@ public class ByteList {
     }
 
     /**
+     * Construct a new ByteList object with a reference to a byte array
+     * @param array
+     */
+    public ByteList(byte[] array) {
+        size = array.length;
+        position = array.length;
+        this.array = array;
+    }
+
+    /**
      * Add a byte to the end of the list
      * @param b byte to be added
      */
@@ -55,5 +65,13 @@ public class ByteList {
         }
         size *= 2;
         array = newArray;
+    }
+
+    public byte[] getArray() {
+        byte[] concatArray = new byte[position];
+        for (int i = 0; i < position; i++) {
+            concatArray[i] = array[i];
+        }
+        return concatArray;
     }
 }
