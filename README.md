@@ -15,6 +15,8 @@
   * [Viikko 3](https://github.com/tjouni/j-pack/blob/master/docs/viikkoraportti3.md)
   * [Viikko 4](https://github.com/tjouni/j-pack/blob/master/docs/viikkoraportti4.md)
   * [Viikko 5](https://github.com/tjouni/j-pack/blob/master/docs/viikkoraportti5.md)
+  * [Viikko 6](https://github.com/tjouni/j-pack/blob/master/docs/viikkoraportti6.md)
+
 
 ### Usage
 
