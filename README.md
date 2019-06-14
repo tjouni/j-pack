@@ -19,7 +19,7 @@
 ### Usage
 
  ```
- ./gradlew run -args'arguments'
+ ./gradlew run --args='arguments'
  ```
  
 arguments: [-hu <file>] [-df <file>] [-de <input file> <output file>]
