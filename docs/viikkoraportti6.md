@@ -10,6 +10,7 @@ Aikaa käytetty 7h.
   * Toteutettu ohjelmaan käyttöliittymä
   * Ohjelma osaa nyt purkaa molemmilla tavoilla pakatun tiedoston. Pakatun tiedoston ensimmäinen bitti kertoo mitä pakkausmetodia on käytetty.
   * Tutustuttu hajautustaulun toteuttamiseen LZ77 varten
+  * Lisätty käyttöohjeet README.md:hen
   
 ### Miten ohjelma on edistynyt?
 
