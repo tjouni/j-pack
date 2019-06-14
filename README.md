@@ -22,7 +22,7 @@
  ./gradlew run --args='arguments'
  ```
  
-arguments: [-hu <file>] [-df <file>] [-de <input file> <output file>]
+arguments: [-hu *filename*] [-df *filename*] [-de *inputfile outputfile*]
 
 * hu       compress file using Huffman only
 * df       compress using LZ77 + Huffman
