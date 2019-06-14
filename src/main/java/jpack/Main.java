@@ -41,7 +41,7 @@ public class Main {
             System.out.println(e);
             System.out.println("Incorrect arguments.");
             System.out.println();
-            System.out.println("usage: java -jar jpack.jar [-hu <file>] [-df <file>] [-de <input file> <output file>]");
+            System.out.println("arguments: [-hu <file>] [-df <file>] [-de <input file> <output file>]");
             System.out.println();
             System.out.println("hu\t compress file using Huffman only");
             System.out.println("df\t compress using LZ77 + Huffman");
