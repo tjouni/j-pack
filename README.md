@@ -16,3 +16,14 @@
   * [Viikko 4](https://github.com/tjouni/j-pack/blob/master/docs/viikkoraportti4.md)
   * [Viikko 5](https://github.com/tjouni/j-pack/blob/master/docs/viikkoraportti5.md)
 
+### Usage
+
+ ```
+ ./gradlew run -args'arguments'
+ ```
+ 
+arguments: [-hu <file>] [-df <file>] [-de <input file> <output file>]
+
+* hu       compress file using Huffman only
+* df       compress using LZ77 + Huffman
+* de       decompress a jpack compressed file
