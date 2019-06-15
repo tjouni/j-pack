@@ -23,8 +23,6 @@ public class DeflateTest {
         HuffmanCompress testHuffmanCompress = new HuffmanCompress();
         byte[] testCompressedList2 = testHuffmanCompress.compress(testCompressedList, true);
 
-        System.out.println("testCompressedList2 size: " + testCompressedList2.length);
-
         HuffmanDecompress testHuffmanDecompress = new HuffmanDecompress();
         byte[] testDecompressedList = testHuffmanDecompress.decompress(testCompressedList2);
 
@@ -48,9 +46,7 @@ public class DeflateTest {
 
         HuffmanCompress testHuffmanCompress = new HuffmanCompress();
         byte[] testCompressedList2 = testHuffmanCompress.compress(testCompressedList, true);
-
-        System.out.println("testCompressedList2 size: " + testCompressedList2.length);
-
+        
         HuffmanDecompress testHuffmanDecompress = new HuffmanDecompress();
         byte[] testDecompressedList = testHuffmanDecompress.decompress(testCompressedList2);
 

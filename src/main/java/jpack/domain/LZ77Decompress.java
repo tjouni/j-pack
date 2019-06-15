@@ -20,19 +20,19 @@ public class LZ77Decompress {
     /**
      * Decompress the LZ77 compressed file
      *
-     * @param compressedBytes A ByteList representation of the compressed file
+     * @param compressedBits A ByteList representation of the compressed file
      * @return a ByteList representation of the uncompressed file
      */
-    public byte[] decompress(BitList compressedBytes) {
+    public byte[] decompress(BitList compressedBits) {
         ByteList fileBytes = new ByteList();
 
-        readFileBeginning(compressedBytes, fileBytes);
-        while (compressedBytes.getReadPosition() < compressedBytes.size()) {
-            boolean isBlock = compressedBytes.readNextBit();
+        readFileBeginning(compressedBits, fileBytes);
+        while (compressedBits.getReadPosition() < compressedBits.size()) {
+            boolean isBlock = compressedBits.readNextBit();
             if (isBlock) {
 
-                int byte0 = compressedBytes.readNextByte();
-                int byte1 = compressedBytes.readNextByte();
+                int byte0 = compressedBits.readNextByte();
+                int byte1 = compressedBits.readNextByte();
 
                 int blockOffset = (byte0 << 4 & 0xFF0) | (byte1 >> 4 & 0xF);
                 int blockLength = byte1 & 0xF;
@@ -41,8 +41,8 @@ public class LZ77Decompress {
                 for (int i = 0; i < blockLength; i++) {
                     fileBytes.add(fileBytes.get(blockStart + i));
                 }
-            } else if (compressedBytes.size() - compressedBytes.getReadPosition() > 7) {
-                fileBytes.add(compressedBytes.readNextByte());
+            } else if (compressedBits.size() - compressedBits.getReadPosition() > 7) {
+                fileBytes.add(compressedBits.readNextByte());
             }
         }
         return fileBytes.getArray();

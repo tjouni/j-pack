@@ -19,9 +19,9 @@ public class LZ77Compress {
      */
     public byte[] compress(byte[] fileBytes) {
         int fileLength = fileBytes.length;
-        BitList compressedBytes = new BitList();
+        BitList compressedBits = new BitList();
 
-        writeFileBeginning(fileBytes, compressedBytes);
+        writeFileBeginning(fileBytes, compressedBits);
 
         for (int readPosition = WINDOW_SIZE; readPosition < fileLength; readPosition++) {
             lookaheadSize = Math.min(lookaheadSize, fileLength - readPosition);
@@ -30,18 +30,18 @@ public class LZ77Compress {
 
             byte[] writeBytes = getWriteBytes(blockParameters);
 
-            if (blockParameters[1] > 2) {
-                compressedBytes.add(true);
-                compressedBytes.writeByte(writeBytes[0]);
-                compressedBytes.writeByte(writeBytes[1]);
+            if (blockParameters[1] != 0) {
+                compressedBits.add(true);
+                compressedBits.writeByte(writeBytes[0]);
+                compressedBits.writeByte(writeBytes[1]);
                 readPosition += blockParameters[1] - 1;
             } else {
-                compressedBytes.add(false);
+                compressedBits.add(false);
                 byte nextByte = fileBytes[readPosition];
-                compressedBytes.writeByte(nextByte);
+                compressedBits.writeByte(nextByte);
             }
         }
-        return compressedBytes.toByteArray();
+        return compressedBits.toByteArray();
     }
 
     /**
@@ -81,9 +81,6 @@ public class LZ77Compress {
             if (currentBlockLength >= 1 && currentBlockLength > blockLength) {
                 blockLength = currentBlockLength;
                 blockOffset = offset;
-            }
-            if (blockLength >= lookaheadSize * 2 / 3) {
-                //break;
             }
         }
         short[] offsetAndLength = new short[2];
