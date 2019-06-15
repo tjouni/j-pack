@@ -82,6 +82,10 @@ public class Main {
         compressionRatio = (double) bytes.length / (double) huffmanBytes.length;
         System.out.println("Huffman compression ratio: " + String.format("%.2f", compressionRatio));
         System.out.println("Huffman compression time: " + (compressionEndTime - compressionStartTime) + "ms");
+        compressionRatio = (double) fileBytes.length / (double) huffmanBytes.length;
+
+        System.out.println("Total compression ratio: " + String.format("%.2f", compressionRatio));
+
 
         fileIO.writeFileBytes(fileString, huffmanBytes);
     }
