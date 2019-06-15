@@ -17,7 +17,7 @@ public class HuffmanDecompress {
      * @param huffmanBytes
      * @return
      */
-    public ByteList decompress(byte[] huffmanBytes) {
+    public byte[] decompress(byte[] huffmanBytes) {
         BitList huffmanBits = new BitList(huffmanBytes);
 
         this.lz77 = huffmanBits.readNextBit();
@@ -29,7 +29,7 @@ public class HuffmanDecompress {
 
         // number of bits is array length - last byte times 8 bits + the bits in the last byte
         long encodedBitLength = (huffmanBytes.length-1) * 8 + lastByteBits;
-        return decode(huffmanBits, root, encodedBitLength);
+        return decode(huffmanBits, root, encodedBitLength).getArray();
     }
 
     /**

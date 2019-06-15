@@ -18,7 +18,7 @@ public class HuffmanCompress {
      * Compress a ByteList object with Huffman coding
      * @return
      */
-    public byte[] compress(ByteList uncompressed, Boolean lz77) {
+    public byte[] compress(byte[] uncompressed, Boolean lz77) {
         String[] codes = new String[256];
 
         int[] frequencies = getFrequencies(uncompressed);
@@ -48,10 +48,10 @@ public class HuffmanCompress {
      * @param bytes
      * @return int array indexed by byte value + 128, value is frequency
      */
-    private int[] getFrequencies(ByteList bytes) {
+    private int[] getFrequencies(byte[] bytes) {
         int[] frequencies = new int[256];
-        for (int i = 0; i < bytes.size(); i++) {
-            frequencies[bytes.get(i) + 128]++;
+        for (int i = 0; i < bytes.length; i++) {
+            frequencies[bytes[i] + 128]++;
         }
         return frequencies;
     }
@@ -77,9 +77,10 @@ public class HuffmanCompress {
      * @param uncompressed
      * @param codes
      */
-    private void writeCompressedBits(BitList bits, ByteList uncompressed, String[] codes) {
-        for (int i = 0; i < uncompressed.size(); i++) {
-            String code = codes[uncompressed.get(i) + 128];
+    private void writeCompressedBits(BitList bits, byte[] uncompressed, String[] codes) {
+        for (int i = 0; i < uncompressed.length; i++) {
+            String code = codes[uncompressed[i] + 128];
+            //System.out.println(code);
             for (int j = 0; j < code.length(); j++) {
                 if (code.charAt(j) == '1') {
                     bits.add(true);

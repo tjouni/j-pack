@@ -15,16 +15,16 @@ public class LZ77CompressTest {
             testArray[i] = (byte)i;
         }
         LZ77Compress testCompress = new LZ77Compress(4096);
-        ByteList testList = testCompress.compress(testArray);
-        assertEquals(testArray.length + 4, testList.size());
+        byte[] testList = testCompress.compress(testArray);
+        assertEquals(testArray.length + 4, testList.length);
     }
 
     @Test
     public void emptyFileCompressionTest() {
         byte[] testArray = new byte[0];
         LZ77Compress testCompress = new LZ77Compress(4096);
-        ByteList testList = testCompress.compress(testArray);
-        assertEquals(testArray.length + 4, testList.size());
+        byte[] testList = testCompress.compress(testArray);
+        assertEquals(testArray.length + 4, testList.length);
     }
 
     @Test
@@ -35,8 +35,8 @@ public class LZ77CompressTest {
             testArray[i] = (byte)i;
         }
         LZ77Compress testCompress = new LZ77Compress(4096);
-        ByteList testList = testCompress.compress(testArray);
-        assertTrue(testList.size() < testArray.length + 4);
+        byte[] testList = testCompress.compress(testArray);
+        assertTrue(testList.length < testArray.length + 4);
     }
 
 

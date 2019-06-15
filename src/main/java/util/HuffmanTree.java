@@ -1,7 +1,5 @@
 package util;
 
-import java.util.PriorityQueue;
-
 /**
  * A Huffman code tree
  */
@@ -15,7 +13,7 @@ public class HuffmanTree {
      * @param frequencies indexed by byte+128
      */
     public HuffmanTree(int[] frequencies) {
-        PriorityQueue<HuffmanNode> huffmanTrees = new PriorityQueue<>();
+        MinimumHeap huffmanTrees = new MinimumHeap();
         lengthInBits = 0;
         for (short i = 0; i < 256; i++) {
             if (frequencies[i] > 0) {

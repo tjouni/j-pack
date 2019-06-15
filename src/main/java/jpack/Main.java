@@ -2,6 +2,7 @@ package jpack;
 
 import jpack.domain.HuffmanCompress;
 import jpack.domain.HuffmanDecompress;
+import util.BitList;
 import util.ByteList;
 import jpack.domain.LZ77Compress;
 import jpack.domain.LZ77Decompress;
@@ -55,7 +56,7 @@ public class Main {
     private static void compress(byte[] fileBytes, String fileString, boolean lz77, FileIO fileIO) throws IOException {
         System.out.println("original file size: " + fileBytes.length + "B");
 
-        ByteList bytes;
+        byte[] bytes;
         Long compressionStartTime;
         Long compressionEndTime;
         double compressionRatio;
@@ -66,12 +67,12 @@ public class Main {
             LZ77Compress lz77compress = new LZ77Compress(WINDOW_SIZE);
             bytes = lz77compress.compress(fileBytes);
             compressionEndTime = System.currentTimeMillis();
-            System.out.println("LZ77 compressed file size: " + bytes.size() + "B");
-            compressionRatio = (double) fileBytes.length / (double) bytes.size();
+            System.out.println("LZ77 compressed file size: " + bytes.length + "B");
+            compressionRatio = (double) fileBytes.length / (double) bytes.length;
             System.out.println("LZ77 compression ratio: " + String.format("%.2f", compressionRatio));
             System.out.println("LZ77 compression time: " + (compressionEndTime - compressionStartTime) + "ms");
         } else {
-            bytes = new ByteList(fileBytes);
+            bytes = fileBytes;
         }
 
         compressionStartTime = System.currentTimeMillis();
@@ -79,7 +80,7 @@ public class Main {
         byte[] huffmanBytes = huffmanCompress.compress(bytes, lz77);
         compressionEndTime = System.currentTimeMillis();
         System.out.println("Huffman compressed file size: " + huffmanBytes.length + "B");
-        compressionRatio = (double) bytes.size() / (double) huffmanBytes.length;
+        compressionRatio = (double) bytes.length / (double) huffmanBytes.length;
         System.out.println("Huffman compression ratio: " + String.format("%.2f", compressionRatio));
         System.out.println("Huffman compression time: " + (compressionEndTime - compressionStartTime) + "ms");
 
@@ -90,22 +91,20 @@ public class Main {
         Long decompressionStartTime = System.currentTimeMillis();
 
         HuffmanDecompress huffmanDecompress = new HuffmanDecompress();
-        ByteList bytes = huffmanDecompress.decompress(fileBytes);
+        byte[] bytes = huffmanDecompress.decompress(fileBytes);
         Boolean lz77 = huffmanDecompress.isLz77();
 
         if (lz77) {
+            System.out.println("at lz77 decomrpess: " + bytes.length);
             LZ77Decompress lz77Decompress = new LZ77Decompress(WINDOW_SIZE);
-            ByteList lz77bytes = lz77Decompress.decompress(bytes);
-            bytes = lz77bytes;
+            bytes = lz77Decompress.decompress(new BitList(bytes));
         }
-
-        byte[] array = bytes.getArray();
 
         Long decompressionEndTime = System.currentTimeMillis();
 
         System.out.println("Decompression time: " + (decompressionEndTime - decompressionStartTime) + "ms");
 
 
-        fileIO.writeFileBytes(outputFileString, array);
+        fileIO.writeFileBytes(outputFileString, bytes);
     }
 }

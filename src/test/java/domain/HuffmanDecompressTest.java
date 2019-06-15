@@ -13,29 +13,29 @@ public class HuffmanDecompressTest {
     public void HuffmanDecompressSizeTest() {
         HuffmanCompress testCompress = new HuffmanCompress();
         HuffmanDecompress testDecompress = new HuffmanDecompress();
-        ByteList testList = new ByteList();
+        byte[] testList = new byte[1000001];
         for (int i = 0; i < 1000000; i++) {
-            testList.add((byte) 5);
+            testList[i] = (byte) 5;
         }
-        testList.add((byte) 1);
+        testList[1000000] = (byte) 1;
         byte[] compressedArray = testCompress.compress(testList, false);
-        ByteList decompressedList = testDecompress.decompress(compressedArray);
-        assertEquals(decompressedList.size(), testList.size());
+        byte[] decompressedList = testDecompress.decompress(compressedArray);
+        assertEquals(decompressedList.length, testList.length);
     }
 
     @Test
     public void HuffmanDecompressDataTest() {
         HuffmanCompress testCompress = new HuffmanCompress();
         HuffmanDecompress testDecompress = new HuffmanDecompress();
-        ByteList testList = new ByteList();
+        byte[] testList = new byte[1000001];
         for (int i = 0; i < 1000000; i++) {
-            testList.add((byte) 0);
+            testList[i] = (byte) 0;
         }
-        testList.add((byte) 1);
+        testList[1000000] = (byte) 1;
         byte[] compressedArray = testCompress.compress(testList, false);
-        ByteList decompressedList = testDecompress.decompress(compressedArray);
-        for (int i = 0; i < decompressedList.size(); i++) {
-            assertEquals(testList.get(i), decompressedList.get(i));
+        byte[] decompressedList = testDecompress.decompress(compressedArray);
+        for (int i = 0; i < decompressedList.length; i++) {
+            assertEquals(testList[i], decompressedList[i]);
         }
     }
 }

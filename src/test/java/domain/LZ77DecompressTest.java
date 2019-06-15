@@ -1,5 +1,6 @@
 package domain;
 
+import util.BitList;
 import util.ByteList;
 import jpack.domain.LZ77Compress;
 import jpack.domain.LZ77Decompress;
@@ -15,12 +16,12 @@ public class LZ77DecompressTest {
             testArray[i] = (byte)i;
         }
         LZ77Compress testCompress = new LZ77Compress(4096);
-        ByteList testCompressedList = testCompress.compress(testArray);
+        byte[] testCompressedList = testCompress.compress(testArray);
 
         LZ77Decompress testDecompress = new LZ77Decompress(4096);
-        ByteList testDecompressedList = testDecompress.decompress(testCompressedList);
+        byte[] testDecompressedList = testDecompress.decompress(new BitList(testCompressedList));
         for (int i = 0; i < 4000; i++) {
-            assertEquals((byte)i, testDecompressedList.get(i));
+            assertEquals((byte)i, testDecompressedList[i]);
         }
     }
 
@@ -31,12 +32,13 @@ public class LZ77DecompressTest {
             testArray[i] = (byte)i;
         }
         LZ77Compress testCompress = new LZ77Compress(4096);
-        ByteList testCompressedList = testCompress.compress(testArray);
+        byte[] testCompressedList = testCompress.compress(testArray);
 
         LZ77Decompress testDecompress = new LZ77Decompress(4096);
-        ByteList testDecompressedList = testDecompress.decompress(testCompressedList);
+        byte[] testDecompressedList = testDecompress.decompress(new BitList(testCompressedList));
+
         for (int i = 0; i < 1000000; i++) {
-            assertEquals((byte)i, testDecompressedList.get(i));
+            assertEquals((byte)i, testDecompressedList[i]);
         }
     }
 
@@ -45,10 +47,10 @@ public class LZ77DecompressTest {
     public void emptyFileDecompressionTest() {
         byte[] testArray = new byte[0];
         LZ77Compress testCompress = new LZ77Compress(4096);
-        ByteList testCompressedList = testCompress.compress(testArray);
+        byte[] testCompressedList = testCompress.compress(testArray);
 
         LZ77Decompress testDecompress = new LZ77Decompress(4096);
-        ByteList testDecompressedList = testDecompress.decompress(testCompressedList);
-        assertEquals(0, testDecompressedList.size());
+        byte[] testDecompressedList = testDecompress.decompress(new BitList(testCompressedList));
+        assertEquals(0, testDecompressedList.length);
     }
 }

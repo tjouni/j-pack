@@ -193,4 +193,8 @@ public class BitList {
     public long getReadPosition() {
         return readPosition;
     }
+
+    public long getWritePosition() {
+        return writePosition;
+    }
 }
