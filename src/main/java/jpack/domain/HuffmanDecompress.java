@@ -14,6 +14,7 @@ public class HuffmanDecompress {
 
     /**
      * Decompress a Huffman compressed byte array
+     *
      * @param huffmanBytes
      * @return
      */
@@ -21,19 +22,19 @@ public class HuffmanDecompress {
         BitList huffmanBits = new BitList(huffmanBytes);
 
         this.lz77 = huffmanBits.readNextBit();
-        System.out.println(lz77);
         int lastByteBits = huffmanBytes[0] & 127;
         huffmanBits.setReadPosition(9);
 
         HuffmanNode root = readTree(huffmanBits);
 
         // number of bits is array length - last byte times 8 bits + the bits in the last byte
-        long encodedBitLength = (huffmanBytes.length-1) * 8 + lastByteBits;
+        long encodedBitLength = (huffmanBytes.length - 1) * 8 + lastByteBits;
         return decode(huffmanBits, root, encodedBitLength).getArray();
     }
 
     /**
      * Generate a Huffman tree from a Huffman compressed BitList
+     *
      * @param huffmanBits
      * @return
      */
@@ -47,6 +48,7 @@ public class HuffmanDecompress {
 
     /**
      * Decode Huffman encoded BitList
+     *
      * @param huffmanBits
      * @param root
      * @param encodedBitLength
@@ -71,6 +73,7 @@ public class HuffmanDecompress {
 
     /**
      * Returns the first bit value (compressed with LZ77) after decompression
+     *
      * @return
      */
     public boolean isLz77() {

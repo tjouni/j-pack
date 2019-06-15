@@ -2,9 +2,8 @@ package domain;
 
 import jpack.domain.HuffmanCompress;
 import org.junit.Test;
-import util.ByteList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class HuffmanCompressTest {
 
@@ -25,7 +24,7 @@ public class HuffmanCompressTest {
         HuffmanCompress testCompress = new HuffmanCompress();
         byte[] testList = new byte[1000000];
         for (int i = 0; i < 1000000; i++) {
-            testList[i] = (byte) (i%20);
+            testList[i] = (byte) (i % 20);
         }
         byte[] compressedArray = testCompress.compress(testList, false);
 
@@ -37,10 +36,10 @@ public class HuffmanCompressTest {
         HuffmanCompress testCompress = new HuffmanCompress();
         byte[] testList = new byte[1000000];
         for (int i = 0; i < 1000000; i++) {
-            testList[i] = (byte) (i%128);
+            testList[i] = (byte) (i % 128);
         }
         for (int i = 0; i < 1000000; i++) {
-            testList[i] = (byte) (i%10);
+            testList[i] = (byte) (i % 10);
         }
         byte[] compressedArray = testCompress.compress(testList, false);
 

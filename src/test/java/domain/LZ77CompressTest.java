@@ -1,9 +1,10 @@
 package domain;
 
-import util.ByteList;
 import jpack.domain.LZ77Compress;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 public class LZ77CompressTest {
@@ -12,7 +13,7 @@ public class LZ77CompressTest {
     public void fileSmallerThanWindowIsLeftUncompressed() {
         byte[] testArray = new byte[4000];
         for (int i = 0; i < 4000; i++) {
-            testArray[i] = (byte)i;
+            testArray[i] = (byte) i;
         }
         LZ77Compress testCompress = new LZ77Compress(4096);
         byte[] testList = testCompress.compress(testArray);
@@ -32,7 +33,7 @@ public class LZ77CompressTest {
         byte[] testArray = new byte[1000000];
 
         for (int i = 0; i < 1000000; i++) {
-            testArray[i] = (byte)i;
+            testArray[i] = (byte) i;
         }
         LZ77Compress testCompress = new LZ77Compress(4096);
         byte[] testList = testCompress.compress(testArray);

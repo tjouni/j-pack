@@ -1,11 +1,11 @@
 package domain;
 
-import util.BitList;
-import util.ByteList;
 import jpack.domain.LZ77Compress;
 import jpack.domain.LZ77Decompress;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import util.BitList;
+
+import static org.junit.Assert.assertEquals;
 
 public class LZ77DecompressTest {
 
@@ -13,7 +13,7 @@ public class LZ77DecompressTest {
     public void smallFileDecompressionTest() {
         byte[] testArray = new byte[4000];
         for (int i = 0; i < 4000; i++) {
-            testArray[i] = (byte)i;
+            testArray[i] = (byte) i;
         }
         LZ77Compress testCompress = new LZ77Compress(4096);
         byte[] testCompressedList = testCompress.compress(testArray);
@@ -21,7 +21,7 @@ public class LZ77DecompressTest {
         LZ77Decompress testDecompress = new LZ77Decompress(4096);
         byte[] testDecompressedList = testDecompress.decompress(new BitList(testCompressedList));
         for (int i = 0; i < 4000; i++) {
-            assertEquals((byte)i, testDecompressedList[i]);
+            assertEquals((byte) i, testDecompressedList[i]);
         }
     }
 
@@ -29,7 +29,7 @@ public class LZ77DecompressTest {
     public void largeFileDecompressionTest() {
         byte[] testArray = new byte[1000000];
         for (int i = 0; i < 1000000; i++) {
-            testArray[i] = (byte)i;
+            testArray[i] = (byte) i;
         }
         LZ77Compress testCompress = new LZ77Compress(4096);
         byte[] testCompressedList = testCompress.compress(testArray);
@@ -38,7 +38,7 @@ public class LZ77DecompressTest {
         byte[] testDecompressedList = testDecompress.decompress(new BitList(testCompressedList));
 
         for (int i = 0; i < 1000000; i++) {
-            assertEquals((byte)i, testDecompressedList[i]);
+            assertEquals((byte) i, testDecompressedList[i]);
         }
     }
 

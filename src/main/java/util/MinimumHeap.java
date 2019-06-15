@@ -19,6 +19,19 @@ public class MinimumHeap {
         moveUp(size);
     }
 
+    private void moveUp(int i) {
+        while (i > 1 && heap[i].compareTo(heap[i / 2]) < 0) {
+            swap(i, i / 2);
+            i /= 2;
+        }
+    }
+
+    private void swap(int a, int b) {
+        HuffmanNode temp = heap[a];
+        heap[a] = heap[b];
+        heap[b] = temp;
+    }
+
     public int size() {
         return size;
     }
@@ -31,26 +44,13 @@ public class MinimumHeap {
         return minimum;
     }
 
-    private void swap(int a, int b) {
-        HuffmanNode temp = heap[a];
-        heap[a] = heap[b];
-        heap[b] = temp;
-    }
-
     private void moveDown(int i) {
-        while(2*i <= size) {
-            int minChild = 2*i;
-            if (minChild < size && heap[minChild].compareTo(heap[minChild+1]) > 0) minChild++;
+        while (2 * i <= size) {
+            int minChild = 2 * i;
+            if (minChild < size && heap[minChild].compareTo(heap[minChild + 1]) > 0) minChild++;
             if (heap[i].compareTo(heap[minChild]) < 0) break;
-            swap(i,minChild);
+            swap(i, minChild);
             i = minChild;
-        }
-    }
-
-    private void moveUp(int i) {
-        while(i > 1 && heap[i].compareTo(heap[i/2]) < 0) {
-            swap(i,i/2);
-            i /= 2;
         }
     }
 }

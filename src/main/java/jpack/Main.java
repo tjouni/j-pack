@@ -2,11 +2,10 @@ package jpack;
 
 import jpack.domain.HuffmanCompress;
 import jpack.domain.HuffmanDecompress;
-import util.BitList;
-import util.ByteList;
 import jpack.domain.LZ77Compress;
 import jpack.domain.LZ77Decompress;
 import jpack.io.FileIO;
+import util.BitList;
 
 import java.io.IOException;
 
@@ -95,7 +94,6 @@ public class Main {
         Boolean lz77 = huffmanDecompress.isLz77();
 
         if (lz77) {
-            System.out.println("at lz77 decomrpess: " + bytes.length);
             LZ77Decompress lz77Decompress = new LZ77Decompress(WINDOW_SIZE);
             bytes = lz77Decompress.decompress(new BitList(bytes));
         }

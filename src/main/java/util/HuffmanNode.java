@@ -3,7 +3,7 @@ package util;
 /**
  * a Huffman code node object
  */
-public class HuffmanNode implements Comparable<HuffmanNode>{
+public class HuffmanNode implements Comparable<HuffmanNode> {
     private Byte uncodedByte;
     private int frequency;
     private HuffmanNode leftChild;
@@ -12,6 +12,7 @@ public class HuffmanNode implements Comparable<HuffmanNode>{
 
     /**
      * Construct a HuffmanNode object, node is a leaf if both children are null
+     *
      * @param uncodedByte
      * @param frequency
      * @param leftChild
@@ -23,10 +24,6 @@ public class HuffmanNode implements Comparable<HuffmanNode>{
         this.leftChild = leftChild;
         this.rightChild = rightChild;
         leaf = (leftChild == null && rightChild == null);
-    }
-
-    public int getFrequency() {
-        return frequency;
     }
 
     public HuffmanNode getLeftChild() {
@@ -42,7 +39,6 @@ public class HuffmanNode implements Comparable<HuffmanNode>{
     }
 
     /**
-     *
      * @return true if both children null
      */
     public boolean isLeaf() {
@@ -51,11 +47,16 @@ public class HuffmanNode implements Comparable<HuffmanNode>{
 
     /**
      * Compare frequencies of the nodes. Smaller frequency comes first
+     *
      * @param node
      * @return
      */
-    public int compareTo (HuffmanNode node) {
+    public int compareTo(HuffmanNode node) {
         return this.getFrequency() - node.getFrequency();
+    }
+
+    public int getFrequency() {
+        return frequency;
     }
 
 }

@@ -10,6 +10,7 @@ public class HuffmanTree {
     /**
      * Construct a new Huffman code tree based on byte frequencies and count the number of bits needed
      * for representation in a file.
+     *
      * @param frequencies indexed by byte+128
      */
     public HuffmanTree(int[] frequencies) {
@@ -33,6 +34,7 @@ public class HuffmanTree {
 
     /**
      * Get root of Huffman code tree
+     *
      * @return
      */
     public HuffmanNode getRoot() {
@@ -46,6 +48,7 @@ public class HuffmanTree {
     /**
      * Write bit representation of the Huffman tree on a BitList object. 0 is a non-leaf node,
      * 1 followed by 8b byte is a leaf node.
+     *
      * @param bits
      * @param root
      */

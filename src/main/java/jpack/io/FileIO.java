@@ -1,7 +1,5 @@
 package jpack.io;
 
-import util.ByteList;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,6 +9,7 @@ public class FileIO {
 
     /**
      * read a file into a byte array
+     *
      * @param filePath path to the file to be read
      * @return fileBytes a byte array representation of the file
      * @throws IOException
@@ -23,7 +22,8 @@ public class FileIO {
 
     /**
      * Convert a Byte ArrayList to a byte array, then write to file
-     * @param filePath path to output file
+     *
+     * @param filePath  path to output file
      * @param fileBytes a byte array
      * @throws IOException
      */

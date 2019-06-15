@@ -19,6 +19,7 @@ public class ByteList {
 
     /**
      * Construct a new ByteList object with a reference to a byte array
+     *
      * @param array
      */
     public ByteList(byte[] array) {
@@ -29,6 +30,7 @@ public class ByteList {
 
     /**
      * Add a byte to the end of the list
+     *
      * @param b byte to be added
      */
     public void add(byte b) {
@@ -39,8 +41,19 @@ public class ByteList {
         position++;
     }
 
+    private void grow() {
+        byte[] newArray = new byte[2 * size];
+
+        for (int i = 0; i < size; i++) {
+            newArray[i] = array[i];
+        }
+        size *= 2;
+        array = newArray;
+    }
+
     /**
      * Get number of elements on the list
+     *
      * @return
      */
     public int size() {
@@ -49,22 +62,13 @@ public class ByteList {
 
     /**
      * Get byte at index
+     *
      * @param index
      * @return
      */
     public byte get(int index) {
         if (index > position) throw new IndexOutOfBoundsException("index: " + index + ", current size: " + position);
         else return array[index];
-    }
-
-    private void grow() {
-        byte[] newArray = new byte[2*size];
-
-        for (int i = 0; i < size; i++) {
-            newArray[i] = array[i];
-        }
-        size *= 2;
-        array = newArray;
     }
 
     public byte[] getArray() {

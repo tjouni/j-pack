@@ -2,7 +2,8 @@ package util;
 
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 public class ByteListTest {
 
@@ -38,7 +39,7 @@ public class ByteListTest {
         for (int i = 0; i < n; i++) {
             testList.add(testByte);
         }
-        assertEquals(testByte, testList.get(testList.size()-1));
+        assertEquals(testByte, testList.get(testList.size() - 1));
     }
 
     @Test

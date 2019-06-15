@@ -2,12 +2,12 @@ package domain;
 
 import jpack.domain.HuffmanCompress;
 import jpack.domain.HuffmanDecompress;
-import util.BitList;
-import util.ByteList;
 import jpack.domain.LZ77Compress;
 import jpack.domain.LZ77Decompress;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import util.BitList;
+
+import static org.junit.Assert.assertEquals;
 
 public class DeflateTest {
 
@@ -15,7 +15,7 @@ public class DeflateTest {
     public void smallFileDeflateTest() {
         byte[] testArray = new byte[4000];
         for (int i = 0; i < 4000; i++) {
-            testArray[i] = (byte)i;
+            testArray[i] = (byte) i;
         }
         LZ77Compress testLzCompress = new LZ77Compress(4096);
         byte[] testCompressedList = testLzCompress.compress(testArray);
@@ -32,9 +32,8 @@ public class DeflateTest {
         byte[] testDecompressedList2 = testLzDecompress.decompress(new BitList(testDecompressedList));
 
 
-
         for (int i = 0; i < 4000; i++) {
-            assertEquals((byte)i, testDecompressedList2[i]);
+            assertEquals((byte) i, testDecompressedList2[i]);
         }
     }
 
@@ -42,7 +41,7 @@ public class DeflateTest {
     public void bigFileDeflateTest() {
         byte[] testArray = new byte[1000000];
         for (int i = 0; i < 1000000; i++) {
-            testArray[i] = (byte)i;
+            testArray[i] = (byte) i;
         }
         LZ77Compress testLzCompress = new LZ77Compress(4096);
         byte[] testCompressedList = testLzCompress.compress(testArray);
@@ -59,9 +58,8 @@ public class DeflateTest {
         byte[] testDecompressedList2 = testLzDecompress.decompress(new BitList(testDecompressedList));
 
 
-
         for (int i = 0; i < 1000000; i++) {
-            assertEquals((byte)i, testDecompressedList2[i]);
+            assertEquals((byte) i, testDecompressedList2[i]);
         }
     }
 }

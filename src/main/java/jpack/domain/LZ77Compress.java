@@ -1,7 +1,6 @@
 package jpack.domain;
 
 import util.BitList;
-import util.ByteList;
 
 public class LZ77Compress {
     private int lookaheadSize = 15;
@@ -23,7 +22,6 @@ public class LZ77Compress {
         BitList compressedBytes = new BitList();
 
         writeFileBeginning(fileBytes, compressedBytes);
-        System.out.println("compr bytes write pos at start: " + compressedBytes.getWritePosition());
 
         for (int readPosition = WINDOW_SIZE; readPosition < fileLength; readPosition++) {
             lookaheadSize = Math.min(lookaheadSize, fileLength - readPosition);
@@ -65,44 +63,6 @@ public class LZ77Compress {
     }
 
     /**
-     * Write the first 4 bytes (original file length in bytes)
-     *
-     * @param fileLength
-     * @param compressedBytes
-     */
-    private void writeFileLength(int fileLength, BitList compressedBytes) {
-        compressedBytes.writeByte((byte) (fileLength >> 24));
-        compressedBytes.writeByte((byte) (fileLength >> 16));
-        compressedBytes.writeByte((byte) (fileLength >> 8));
-        compressedBytes.writeByte((byte) (fileLength));
-    }
-
-    /**
-     * Get first two bytes of the three byte block (12b offset, 4b length)
-     *
-     * @param blockParameters a short[] array with offset and length
-     * @return a byte[] array with correct LZ77 format
-     */
-    private byte[] getWriteBytes(short[] blockParameters) {
-        byte byte0;
-        byte byte1;
-
-        // index 0: block offset, 1: block length
-
-        if (blockParameters[1] > 0) {
-            byte0 = (byte) (blockParameters[0] >>> 4);
-            byte1 = (byte) (blockParameters[0] << 4 & 0xF0 | blockParameters[1]);
-        } else {
-            byte0 = 0;
-            byte1 = 0;
-        }
-
-        byte[] writeBytes = {byte0, byte1};
-
-        return writeBytes;
-    }
-
-    /**
      * Find a long enough (2/3 lookahead buffer size) prefix match.
      *
      * @param lookaheadSize size of the lookahead buffer
@@ -133,5 +93,43 @@ public class LZ77Compress {
         }
 
         return offsetAndLength;
+    }
+
+    /**
+     * Get first two bytes of the three byte block (12b offset, 4b length)
+     *
+     * @param blockParameters a short[] array with offset and length
+     * @return a byte[] array with correct LZ77 format
+     */
+    private byte[] getWriteBytes(short[] blockParameters) {
+        byte byte0;
+        byte byte1;
+
+        // index 0: block offset, 1: block length
+
+        if (blockParameters[1] > 0) {
+            byte0 = (byte) (blockParameters[0] >>> 4);
+            byte1 = (byte) (blockParameters[0] << 4 & 0xF0 | blockParameters[1]);
+        } else {
+            byte0 = 0;
+            byte1 = 0;
+        }
+
+        byte[] writeBytes = {byte0, byte1};
+
+        return writeBytes;
+    }
+
+    /**
+     * Write the first 4 bytes (original file length in bytes)
+     *
+     * @param fileLength
+     * @param compressedBytes
+     */
+    private void writeFileLength(int fileLength, BitList compressedBytes) {
+        compressedBytes.writeByte((byte) (fileLength >> 24));
+        compressedBytes.writeByte((byte) (fileLength >> 16));
+        compressedBytes.writeByte((byte) (fileLength >> 8));
+        compressedBytes.writeByte((byte) (fileLength));
     }
 }

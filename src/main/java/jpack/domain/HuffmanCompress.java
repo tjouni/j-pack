@@ -1,11 +1,8 @@
 package jpack.domain;
 
 import util.BitList;
-import util.ByteList;
 import util.HuffmanNode;
 import util.HuffmanTree;
-
-import java.util.Arrays;
 
 
 public class HuffmanCompress {
@@ -16,6 +13,7 @@ public class HuffmanCompress {
 
     /**
      * Compress a ByteList object with Huffman coding
+     *
      * @return
      */
     public byte[] compress(byte[] uncompressed, Boolean lz77) {
@@ -45,6 +43,7 @@ public class HuffmanCompress {
 
     /**
      * Get frequencies for all bytes in a ByteList object
+     *
      * @param bytes
      * @return int array indexed by byte value + 128, value is frequency
      */
@@ -58,14 +57,14 @@ public class HuffmanCompress {
 
     /**
      * Recursively generate Huffman codes from a Huffman tree
+     *
      * @param node root of the HuffmanTree object
      * @param code empty String object
      */
     private void generateCodes(HuffmanNode node, String code, String[] codes) {
         if (node.isLeaf()) {
             codes[node.getUncodedByte() + 128] = code;
-        }
-        else {
+        } else {
             generateCodes(node.getLeftChild(), code + "0", codes);
             generateCodes(node.getRightChild(), code + "1", codes);
         }
@@ -73,6 +72,7 @@ public class HuffmanCompress {
 
     /**
      * Write Huffman compressed bits on a BitList object
+     *
      * @param bits
      * @param uncompressed
      * @param codes

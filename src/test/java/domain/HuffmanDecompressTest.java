@@ -3,9 +3,8 @@ package domain;
 import jpack.domain.HuffmanCompress;
 import jpack.domain.HuffmanDecompress;
 import org.junit.Test;
-import util.ByteList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class HuffmanDecompressTest {
 
