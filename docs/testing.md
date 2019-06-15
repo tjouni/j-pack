@@ -5,8 +5,13 @@ Project testing is currently done by unit tests and manual compression tests of 
 ### Unit testing
 
   * LZ77 compression and decompression tests
-    * Test compression of different types of files (small and large with lots of repetition) to see actual compression works
-    * Test decompression of different types of files by asserting that the decompressed file matches the original
+    * Test compression of different types of arrays (small and large with lots of repetition) to see actual compression works
+    * Test decompression of different types of arrays by asserting that the decompressed file matches the original
+  * Huffman compression and decompression tests
+    * Test compression of different types of arrays (varying degrees of repetition) to see actual compression works
+    * Test decompression by asserting that the decompressed file matches the original
+  * Deflate compression and decompression test
+    * Test a combination of LZ77+Huffman
   * Data structures tests
     * ByteList tests
       * Test all functions of the dynamically sized Byte array
@@ -20,7 +25,7 @@ Project testing is currently done by unit tests and manual compression tests of 
 
   * Application gives compression ratio and elapsed time figures when used. These numbers are used to test which optimizations give better time/compression performance.
     * File currently used for testing is Aleksis Kivi's Seitsemän veljestä copied five times in a row (3,2MB)
-      * Current performance figures (with only LZ77 implemented):
-        * Compression ratio 1.62
-        * Compression time 7030ms
-        * Decompression time 26ms
+      * Current performance figures (with LZ77+Huffman):
+        * Compression ratio 1.87
+        * Compression time 10150ms
+        * Decompression time 268ms
