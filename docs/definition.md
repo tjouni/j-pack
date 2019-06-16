@@ -48,4 +48,6 @@ The goal of this project is to create a java application that implements Huffman
     * [LEMPEL-ZIV SLIDING WINDOW UNIVERSAL COMPRESSION](http://mit.edu/6.441/spring06/handout/sup/6.441_LZ_77_-_Notes_2b.doc)
   * DEFLATE:
     * [RFC 1951](https://www.ietf.org/rfc/rfc1951.txt)
+  * Hash function:
+    * [Integer Hashing](https://burtleburtle.net/bob/hash/integer.html)
 
