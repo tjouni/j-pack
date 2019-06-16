@@ -80,7 +80,6 @@ public class HuffmanCompress {
     private void writeCompressedBits(BitList bits, byte[] uncompressed, String[] codes) {
         for (int i = 0; i < uncompressed.length; i++) {
             String code = codes[uncompressed[i] + 128];
-            //System.out.println(code);
             for (int j = 0; j < code.length(); j++) {
                 if (code.charAt(j) == '1') {
                     bits.add(true);

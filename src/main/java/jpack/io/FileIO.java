@@ -21,7 +21,7 @@ public class FileIO {
     }
 
     /**
-     * Convert a Byte ArrayList to a byte array, then write to file
+     * Write a byte array to file
      *
      * @param filePath  path to output file
      * @param fileBytes a byte array

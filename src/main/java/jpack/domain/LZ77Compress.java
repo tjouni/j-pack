@@ -59,11 +59,8 @@ public class LZ77Compress {
      */
     private void writeFileBeginning(byte[] fileBytes, BitList compressedBytes) {
         int fileLength = fileBytes.length;
-
         writeFileLength(fileLength, compressedBytes);
-
         int stopIndex = Math.min(fileLength, WINDOW_SIZE);
-
         for (int readPosition = 0; readPosition < stopIndex; readPosition++) {
             compressedBytes.writeByte(fileBytes[readPosition]);
             if (readPosition + 1 < stopIndex) {
@@ -80,13 +77,9 @@ public class LZ77Compress {
      */
     private byte[] getWriteBytes(short[] blockParameters) {
         // index 0: block offset, 1: block length
-
         byte byte0 = (byte) (blockParameters[0] >>> 4);
         byte byte1 = (byte) (blockParameters[0] << 4 & 0xF0 | blockParameters[1]);
-
-        byte[] writeBytes = {byte0, byte1};
-
-        return writeBytes;
+        return new byte[] {byte0, byte1};
     }
 
     /**

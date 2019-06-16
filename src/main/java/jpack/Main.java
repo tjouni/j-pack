@@ -92,7 +92,7 @@ public class Main {
 
         HuffmanDecompress huffmanDecompress = new HuffmanDecompress();
         byte[] bytes = huffmanDecompress.decompress(fileBytes);
-        Boolean lz77 = huffmanDecompress.isLz77();
+        boolean lz77 = huffmanDecompress.isLz77();
 
         if (lz77) {
             LZ77Decompress lz77Decompress = new LZ77Decompress(WINDOW_SIZE);

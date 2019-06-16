@@ -9,10 +9,6 @@ public class MinimumHeap {
         size = 0;
     }
 
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
     public void add(HuffmanNode node) {
         size++;
         heap[size] = node;

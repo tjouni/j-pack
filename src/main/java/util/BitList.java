@@ -62,7 +62,7 @@ public class BitList {
      *
      * @return true if 1, false if 0
      */
-    public boolean read(long bitReadPosition) {
+    private boolean read(long bitReadPosition) {
         if (bitReadPosition > this.writePosition - 1) {
             throw new IndexOutOfBoundsException("BitList readPosition: " + bitReadPosition + " out of bounds [0," + this.writePosition + ")");
         }
@@ -96,10 +96,8 @@ public class BitList {
             int byteIndex = (int) (writePosition / 8);
             int positionInByte = (int) (7 - writePosition % 8);
             int mask = 1 << positionInByte;
-
             bytes[byteIndex] |= mask;
         }
-
         writePosition++;
         if (writePosition / 8 == arraySize) {
             grow();
@@ -181,12 +179,12 @@ public class BitList {
      */
     @Override
     public String toString() {
-        String ret = "";
+        StringBuilder ret = new StringBuilder();
         for (long i = 0; i < writePosition; i++) {
-            if (read(i)) ret += 1;
-            else ret += 0;
+            if (read(i)) ret.append(1);
+            else ret.append(0);
         }
-        return ret;
+        return ret.toString();
     }
 
     public long getReadPosition() {

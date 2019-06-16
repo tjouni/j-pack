@@ -20,12 +20,12 @@ public class Prefix {
 
     @Override
     public int hashCode() {
-        int a = this.value;
-        a = (a^0xdeadbeef) + (a<<4);
-        a = a ^ (a>>10);
-        a = a + (a<<7);
-        a = a ^ (a>>13);
-        return a;
+        int hash = this.value;
+        hash = (hash^0xdeadbeef) + (hash<<4);
+        hash = hash ^ (hash>>10);
+        hash = hash + (hash<<7);
+        hash = hash ^ (hash>>13);
+        return hash;
     }
 
     public void setChild(Prefix child) {
