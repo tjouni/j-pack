@@ -4,7 +4,7 @@ import util.BitList;
 import util.PrefixHashTable;
 
 public class LZ77Compress {
-    private int lookaheadSize = 15;
+    private int lookaheadSize = 17;
     private int WINDOW_SIZE;
     private PrefixHashTable hashTable;
 
@@ -27,18 +27,20 @@ public class LZ77Compress {
 
         for (int readPosition = WINDOW_SIZE; readPosition < fileLength; readPosition++) {
             lookaheadSize = Math.min(lookaheadSize, fileLength - readPosition);
+            short[] blockParameters = new short[2];
+            if (readPosition + 1 < fileLength) {
+                blockParameters = hashTable.findPrefix(fileBytes[readPosition], fileBytes[readPosition + 1], readPosition, WINDOW_SIZE, lookaheadSize, fileBytes);
+            }
 
-            short[] blockParameters = hashTable.findPrefix(fileBytes[readPosition], fileBytes[readPosition + 1], readPosition, WINDOW_SIZE, lookaheadSize, fileBytes);
-
-            if (blockParameters[1] > 0) {
+            if (blockParameters[0] != 0) {
                 byte[] writeBytes = getWriteBytes(blockParameters);
                 compressedBits.add(true);
                 compressedBits.writeByte(writeBytes[0]);
                 compressedBits.writeByte(writeBytes[1]);
-                for (int i = 0; i < blockParameters[1] && readPosition + i + 1 < fileLength; i++) {
+                for (int i = 0; i < blockParameters[1] + 2 && readPosition + i + 1 < fileLength; i++) {
                     hashTable.put(fileBytes[readPosition + i], fileBytes[readPosition + i + 1], readPosition + i);
                 }
-                readPosition += blockParameters[1] - 1;
+                readPosition += blockParameters[1] + 1;
             } else {
                 compressedBits.add(false);
                 byte nextByte = fileBytes[readPosition];
@@ -79,7 +81,7 @@ public class LZ77Compress {
         // index 0: block offset, 1: block length
         byte byte0 = (byte) (blockParameters[0] >>> 4);
         byte byte1 = (byte) (blockParameters[0] << 4 & 0xF0 | blockParameters[1]);
-        return new byte[] {byte0, byte1};
+        return new byte[]{byte0, byte1};
     }
 
     /**

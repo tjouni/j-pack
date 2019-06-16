@@ -1,19 +1,25 @@
 package util;
 
+/**
+ * Object for storing two byte prefixes in a singly linked list with insertions to the front
+ */
 public class Prefix {
     private Prefix child;
-    private int value;
+    private short value;
     private int index;
 
     public Prefix(byte b1, byte b2, int index) {
-        this.value = (b1 & 0xFF) << 8 | (b2 & 0xFF);
+        this.value = (short) ((b1 & 0xFF) << 8 | (b2 & 0xFF));
         this.index = index;
     }
 
     public Prefix(byte b1, byte b2) {
-        this.value = (b1 & 0xFF) << 8 | (b2 & 0xFF);
+        this.value = (short) ((b1 & 0xFF) << 8 | (b2 & 0xFF));
     }
 
+    /**
+     * Set child to null to cut the tail of the list
+     */
     public void cut() {
         this.child = null;
     }
@@ -40,7 +46,7 @@ public class Prefix {
         return index;
     }
 
-    public int getValue() {
+    public short getValue() {
         return value;
     }
 }

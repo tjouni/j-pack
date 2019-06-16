@@ -38,7 +38,7 @@ public class BitList {
     public BitList(byte[] bytes) {
         this.bytes = bytes;
         this.arraySize = bytes.length;
-        writePosition = arraySize * 8;
+        writePosition = arraySize << 3;
     }
 
     public byte readNextByte() {
@@ -72,7 +72,7 @@ public class BitList {
 
         readByte >>>= positionInByte;
 
-        return readByte % 2 != 0;
+        return (readByte & 1) != 0;
     }
 
     /**
@@ -82,7 +82,7 @@ public class BitList {
      */
     public void writeByte(byte b) {
         for (int i = 7; i >= 0; i--) {
-            add((b >>> i) % 2 != 0);
+            add((b >>> i & 1) != 0);
         }
     }
 
@@ -93,24 +93,24 @@ public class BitList {
      */
     public void add(boolean bit) {
         if (bit) {
-            int byteIndex = (int) (writePosition / 8);
+            int byteIndex = (int) (writePosition >> 3);
             int positionInByte = (int) (7 - writePosition % 8);
             int mask = 1 << positionInByte;
             bytes[byteIndex] |= mask;
         }
         writePosition++;
-        if (writePosition / 8 == arraySize) {
+        if (writePosition >> 3 == arraySize) {
             grow();
         }
     }
 
     private void grow() {
-        byte[] newArray = new byte[2 * arraySize];
+        byte[] newArray = new byte[arraySize << 1];
 
         for (int i = 0; i < arraySize; i++) {
             newArray[i] = bytes[i];
         }
-        arraySize *= 2;
+        arraySize <<= 1;
         bytes = newArray;
     }
 
@@ -121,15 +121,15 @@ public class BitList {
      * @param b
      * @return
      */
-    public void setByte(int index, byte b) {
-        if (index > writePosition / 8) {
+    public void setByte(long index, byte b) {
+        if (index > writePosition >> 3) {
             throw new IndexOutOfBoundsException("BitList index: " + index + " out of bounds [0," + writePosition / 8 + ")");
         }
-        bytes[index] = b;
+        bytes[(int) index] = b;
     }
 
     public byte getByte(int index) {
-        if (index > writePosition / 8) {
+        if (index > writePosition >> 3) {
             throw new IndexOutOfBoundsException("BitList index: " + index + " out of bounds [0," + writePosition / 8 + ")");
         }
         return bytes[index];
@@ -150,7 +150,7 @@ public class BitList {
      * @return
      */
     public byte[] toByteArray() {
-        int newArraySize = (int) (writePosition / 8);
+        int newArraySize = (int) (writePosition >> 3);
 
         if (writePosition % 8 != 0) {
             newArraySize++;

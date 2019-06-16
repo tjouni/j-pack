@@ -6,7 +6,6 @@ import util.ByteList;
 public class LZ77Decompress {
     private static final int HEADER_SIZE = 4;
     private static int WINDOW_SIZE;
-    private static int originalFileLength;
 
     /**
      * Constructor class for LZ77Decompress
@@ -30,12 +29,11 @@ public class LZ77Decompress {
         while (compressedBits.getReadPosition() < compressedBits.size()) {
             boolean isBlock = compressedBits.readNextBit();
             if (isBlock) {
-
                 int byte0 = compressedBits.readNextByte();
                 int byte1 = compressedBits.readNextByte();
 
                 int blockOffset = (byte0 << 4 & 0xFF0) | (byte1 >> 4 & 0xF);
-                int blockLength = byte1 & 0xF;
+                int blockLength = (byte1 & 0xF) + 2;
 
                 int blockStart = fileBytes.size() - blockOffset;
                 for (int i = 0; i < blockLength; i++) {
@@ -49,20 +47,13 @@ public class LZ77Decompress {
     }
 
     /**
-     * Read the next WINDOW_SIZE bytes after the 4 byte header into a ByteList object
+     * Read the header and the next WINDOW_SIZE bytes into a ByteList object
      */
     private void readFileBeginning(BitList compressedBytes, ByteList decompressedBytes) {
-        this.originalFileLength = getFileLength(compressedBytes);
+        int originalFileLength = compressedBytes.readNextByte() << 24 | (compressedBytes.readNextByte() & 0xFF) << 16 | (compressedBytes.readNextByte() & 0xFF) << 8 | (compressedBytes.readNextByte() & 0xFF);
         int stopIndex = Math.min(HEADER_SIZE + originalFileLength, HEADER_SIZE + WINDOW_SIZE);
         for (int i = HEADER_SIZE; i < stopIndex; i++) {
             decompressedBytes.add(compressedBytes.readNextByte());
         }
-    }
-
-    /**
-     * Set originalFileLength to the value represented by the first 4 bytes of the file
-     */
-    private int getFileLength(BitList compressedBytes) {
-        return compressedBytes.readNextByte() << 24 | (compressedBytes.readNextByte() & 0xFF) << 16 | (compressedBytes.readNextByte() & 0xFF) << 8 | (compressedBytes.readNextByte() & 0xFF);
     }
 }
