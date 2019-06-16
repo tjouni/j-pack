@@ -35,4 +35,19 @@ public class HuffmanDecompressTest {
             assertEquals(testList[i], decompressedList[i]);
         }
     }
+
+    @Test
+    public void HuffmanDecompressDataTest2() {
+        HuffmanCompress testCompress = new HuffmanCompress();
+        HuffmanDecompress testDecompress = new HuffmanDecompress();
+        byte[] testList = new byte[1000000];
+        for (int i = 0; i < 1000000; i++) {
+            testList[i] = (byte) (i%64);
+        }
+        byte[] compressedArray = testCompress.compress(testList, false);
+        byte[] decompressedList = testDecompress.decompress(compressedArray);
+        for (int i = 0; i < decompressedList.length; i++) {
+            assertEquals(testList[i], decompressedList[i]);
+        }
+    }
 }
