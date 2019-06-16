@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'jacoco'
 apply plugin: 'application'
+
 mainClassName = 'jpack.Main'
 
 version '1.0-SNAPSHOT'
@@ -20,6 +21,23 @@ jacocoTestReport {
         xml.enabled = true
         html.enabled = true
     }
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Jar File Example',
+                'Implementation-Version': version,
+                'Main-Class': 'jpack.Main'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
 
 check.dependsOn jacocoTestReport
