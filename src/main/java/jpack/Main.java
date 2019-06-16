@@ -16,7 +16,7 @@ public class Main {
      */
     private static final int WINDOW_SIZE = 4096;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
 
         try {
@@ -43,13 +43,10 @@ public class Main {
             System.out.println();
             System.out.println("arguments: [-hu <file>] [-df <file>] [-de <input file> <output file>]");
             System.out.println();
-            System.out.println("hu\t compress file using Huffman only");
-            System.out.println("df\t compress using LZ77 + Huffman");
-            System.out.println("de\t decompress a jpack compressed file");
+            System.out.println("-hu\t compress file using Huffman only");
+            System.out.println("-df\t compress using LZ77 + Huffman");
+            System.out.println("-de\t decompress a jpack compressed file");
         }
-        //ByteList compressedBytes = new ByteList();
-
-
     }
 
     private static void compress(byte[] fileBytes, String fileString, boolean lz77, FileIO fileIO) throws IOException {

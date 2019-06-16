@@ -1,10 +1,12 @@
 package jpack.domain;
 
 import util.BitList;
+import util.PrefixHashTable;
 
 public class LZ77Compress {
     private int lookaheadSize = 15;
     private int WINDOW_SIZE;
+    private PrefixHashTable hashTable;
 
     public LZ77Compress(int WINDOW_SIZE) {
         this.WINDOW_SIZE = WINDOW_SIZE;
@@ -19,26 +21,31 @@ public class LZ77Compress {
      */
     public byte[] compress(byte[] fileBytes) {
         int fileLength = fileBytes.length;
+        hashTable = new PrefixHashTable();
         BitList compressedBits = new BitList();
-
         writeFileBeginning(fileBytes, compressedBits);
 
         for (int readPosition = WINDOW_SIZE; readPosition < fileLength; readPosition++) {
             lookaheadSize = Math.min(lookaheadSize, fileLength - readPosition);
 
-            short[] blockParameters = findPrefix(lookaheadSize, readPosition, fileBytes);
+            short[] blockParameters = hashTable.findPrefix(fileBytes[readPosition], fileBytes[readPosition + 1], readPosition, WINDOW_SIZE, lookaheadSize, fileBytes);
 
-            byte[] writeBytes = getWriteBytes(blockParameters);
-
-            if (blockParameters[1] != 0) {
+            if (blockParameters[1] > 0) {
+                byte[] writeBytes = getWriteBytes(blockParameters);
                 compressedBits.add(true);
                 compressedBits.writeByte(writeBytes[0]);
                 compressedBits.writeByte(writeBytes[1]);
+                for (int i = 0; i < blockParameters[1] && readPosition + i + 1 < fileLength; i++) {
+                    hashTable.put(fileBytes[readPosition + i], fileBytes[readPosition + i + 1], readPosition + i);
+                }
                 readPosition += blockParameters[1] - 1;
             } else {
                 compressedBits.add(false);
                 byte nextByte = fileBytes[readPosition];
                 compressedBits.writeByte(nextByte);
+                if (readPosition + 1 < fileLength) {
+                    hashTable.put(fileBytes[readPosition], fileBytes[readPosition + 1], readPosition);
+                }
             }
         }
         return compressedBits.toByteArray();
@@ -59,37 +66,10 @@ public class LZ77Compress {
 
         for (int readPosition = 0; readPosition < stopIndex; readPosition++) {
             compressedBytes.writeByte(fileBytes[readPosition]);
-        }
-    }
-
-    /**
-     * Find a long enough (2/3 lookahead buffer size) prefix match.
-     *
-     * @param lookaheadSize size of the lookahead buffer
-     * @param readPosition  current read position of file
-     * @return short[] array with the block offset and length at indexes 0 and 1, respectively. Empty array if block length <= 1
-     */
-    private short[] findPrefix(int lookaheadSize, int readPosition, byte[] fileBytes) {
-        short blockLength = 0;
-        short blockOffset = 0;
-
-        for (short offset = 1; offset < WINDOW_SIZE; offset++) {
-            short currentBlockLength = 0;
-            while (currentBlockLength < lookaheadSize && fileBytes[readPosition - offset + currentBlockLength] == fileBytes[readPosition + currentBlockLength]) {
-                currentBlockLength++;
-            }
-            if (currentBlockLength >= 1 && currentBlockLength > blockLength) {
-                blockLength = currentBlockLength;
-                blockOffset = offset;
+            if (readPosition + 1 < stopIndex) {
+                hashTable.put(fileBytes[readPosition], fileBytes[readPosition + 1], readPosition);
             }
         }
-        short[] offsetAndLength = new short[2];
-        if (blockLength > 2) {
-            offsetAndLength[0] = blockOffset;
-            offsetAndLength[1] = blockLength;
-        }
-
-        return offsetAndLength;
     }
 
     /**
@@ -99,18 +79,10 @@ public class LZ77Compress {
      * @return a byte[] array with correct LZ77 format
      */
     private byte[] getWriteBytes(short[] blockParameters) {
-        byte byte0;
-        byte byte1;
-
         // index 0: block offset, 1: block length
 
-        if (blockParameters[1] > 0) {
-            byte0 = (byte) (blockParameters[0] >>> 4);
-            byte1 = (byte) (blockParameters[0] << 4 & 0xF0 | blockParameters[1]);
-        } else {
-            byte0 = 0;
-            byte1 = 0;
-        }
+        byte byte0 = (byte) (blockParameters[0] >>> 4);
+        byte byte1 = (byte) (blockParameters[0] << 4 & 0xF0 | blockParameters[1]);
 
         byte[] writeBytes = {byte0, byte1};
 
