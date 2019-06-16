@@ -24,7 +24,6 @@ public class Prefix {
         this.child = null;
     }
 
-    @Override
     public int hashCode() {
         int hash = this.value;
         hash = (hash^0xdeadbeef) + (hash<<4);

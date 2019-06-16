@@ -5,7 +5,7 @@ package util;
  */
 public class PrefixHashTable {
     private Prefix[] table;
-    private final static int M = 1009;
+    private final static int M = 3001;
 
     public PrefixHashTable() {
         table = new Prefix[M];

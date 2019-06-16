@@ -18,17 +18,6 @@ public class ByteList {
     }
 
     /**
-     * Construct a new ByteList object with a reference to a byte array
-     *
-     * @param array
-     */
-    public ByteList(byte[] array) {
-        size = array.length;
-        position = array.length;
-        this.array = array;
-    }
-
-    /**
      * Add a byte to the end of the list
      *
      * @param b byte to be added
@@ -42,12 +31,12 @@ public class ByteList {
     }
 
     private void grow() {
-        byte[] newArray = new byte[2 * size];
+        byte[] newArray = new byte[size << 1];
 
         for (int i = 0; i < size; i++) {
             newArray[i] = array[i];
         }
-        size *= 2;
+        size <<= 1;
         array = newArray;
     }
 
