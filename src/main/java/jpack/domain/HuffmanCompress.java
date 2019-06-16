@@ -26,7 +26,10 @@ public class HuffmanCompress {
 
         HuffmanNode root = tree.getRoot();
         String startCode = "";
-        //if (root.isLeaf()) startCode += "1";
+        // Add extra node if only one byte value in uncompressed file
+        if (root.isLeaf()) {
+            root = new HuffmanNode(null, 0, root, new HuffmanNode((byte)(root.getUncodedByte()-1), 0, null, null));
+        }
         generateCodes(root, startCode, codes);
 
         // Save space for header
