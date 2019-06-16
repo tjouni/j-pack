@@ -28,6 +28,6 @@ Project testing is currently done by unit tests and manual compression tests of 
   * Application gives compression ratio and elapsed time figures when used. These numbers are used to test which optimizations give better time/compression performance.
     * File currently used for testing is Aleksis Kivi's Seitsemän veljestä copied five times in a row (3,2MB)
       * Current performance figures (with LZ77+Huffman and hash table prefix search):
-        * Compression ratio 1.83
-        * Compression time 405ms
-        * Decompression time 260ms
+        * Compression ratio 1.85
+        * Compression time 340ms (LZ77) + 110ms (Huffman) = 450ms
+        * Decompression time 230ms
