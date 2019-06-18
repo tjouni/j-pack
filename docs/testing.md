@@ -36,7 +36,7 @@ Project testing is currently done by unit tests and manual compression tests of 
 | alice29.txt  | 152089   | 87782              | 1.73              | 42.3%         | 22                   | 16                     |
 | asyoulik.txt | 125179   | 75892              | 1.65              | 39.4%         | 22                   | 19                     |
 | cp.html      | 24603    | 16307              | 1.51              | 33.7%         | 8                    | 9                      |
-| fields.c     | 11150    | 7140               | 1.56              | 71.0%         | 11                   | 9                      |
+| fields.c     | 11150    | 7140               | 1.56              | 36.0%         | 11                   | 9                      |
 | grammar.lsp  | 3721     | 2266               | 1.64              | 39.1%         | 5                    | 5                      |
 | kennedy.xls  | 1029744  | 462853             | 2.22              | 55.1%         | 36                   | 35                     |
 | lcet10.txt   | 426754   | 250670             | 1.70              | 41.3%         | 29                   | 24                     |
