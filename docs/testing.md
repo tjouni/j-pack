@@ -46,3 +46,17 @@ Project testing is currently done by unit tests and manual compression tests of 
 | xargs.1      | 4227     | 2695               | 1.57              | 36.2%         | 5                    | 4                      |
 
 ##### LZ77+Huffman coding performance figures
+
+| File         | Size(B)  | Compressed Size(B) | Compression ratio | Space savings | Compression time(ms) | Decompression time(ms) |
+| ------------ | -------- | ------------------ | ------------------| ------------- | -------------------- | ---------------------- |
+| alice29.txt  | 152089   | 75566              | 2.01              | 50.3%         | 59                   | 32                     |
+| asyoulik.txt | 125179   | 67665              | 1.85              | 45.9%         | 52                   | 29                     |
+| cp.html      | 24603    | 12745              | 1.93              | 48.2%         | 20                   | 13                     |
+| fields.c     | 11150    | 5328               | 2.09              | 52.2%         | 13                   | 9                      |
+| grammar.lsp  | 3721     | 2276               | 1.63              | 38.8%         | 8                    | 6                      |
+| kennedy.xls  | 1029744  | 269631             | 3.82              | 73.8%         | 152                  | 49                     |
+| lcet10.txt   | 426754   | 203692             | 2.10              | 52.2%         | 106                  | 52                     |
+| plrabn12.txt | 481861   | 268093             | 1.80              | 44.4%         | 152                  | 57                     |
+| ptt5         | 513216   | 93629              | 5.48              | 81.8%         | 183                  | 40                     |
+| sum          | 38240    | 18159              | 2.11              | 52.5%         | 36                   | 14                     |
+| xargs.1      | 4227     | 2794               | 1.51              | 33.9%         | 8                    | 7                      |
