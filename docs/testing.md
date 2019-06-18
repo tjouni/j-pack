@@ -67,3 +67,7 @@ Project testing is currently done by unit tests and manual compression tests of 
 
 As can be seen from the results, LZ77+Huffman is a better choice if the longer compression-time running time is not an issue. All files except grammar.lsp and xargs.1 were compressed more efficiently and in both these cases the difference in file size was under 4%. Most of the files compressed with LZ77+Huffman showed significant space savings compared to Huffman only compression. Decompression times are "fast enough" in both cases, so this should not be an issue.
 
+
+### Sources
+
+  * [The Canterbury Corpus](http://corpus.canterbury.ac.nz/descriptions/#cantrbry)
