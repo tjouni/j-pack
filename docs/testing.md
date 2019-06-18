@@ -60,3 +60,10 @@ Project testing is currently done by unit tests and manual compression tests of 
 | ptt5         | 513216   | 93629              | 5.48              | 81.8%         | 183                  | 40                     |
 | sum          | 38240    | 18159              | 2.11              | 52.5%         | 36                   | 14                     |
 | xargs.1      | 4227     | 2794               | 1.51              | 33.9%         | 8                    | 7                      |
+
+<img src="https://raw.githubusercontent.com/tjouni/j-pack/master/docs/sizechart1.png">
+
+<img src="https://raw.githubusercontent.com/tjouni/j-pack/master/docs/sizechart2.png">
+
+As can be seen from the results, LZ77+Huffman is a better choice if the longer compression-time running time is not an issue. All files except grammar.lsp and xargs.1 were compressed more efficiently and in both these cases the difference in file size was under 4%. Most of the files compressed with LZ77+Huffman showed significant space savings compared to Huffman only compression. Decompression times are "fast enough" in both cases, so this should not be an issue.
+
