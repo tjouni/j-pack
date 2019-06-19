@@ -23,3 +23,7 @@ Minimum heap is implemented as an array of fixed size of 4095 starting at index 
 ### BitList and ByteList
 
 BitList and ByteList are dynamically sized arrays of bits and bytes that allow writing and reading of bits and bytes. Both can be converted to a concatenated byte array.
+
+### IO
+
+All IO operations use Java standard library functionality. All compression and and decompression operations are done in memory and the whole file is read and written to memory at once.
