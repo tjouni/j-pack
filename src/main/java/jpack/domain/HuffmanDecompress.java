@@ -33,7 +33,7 @@ public class HuffmanDecompress {
     }
 
     /**
-     * Generate a Huffman tree from a Huffman compressed BitList
+     * Generate a Huffman tree object from a Huffman compressed BitList
      *
      * @param huffmanBits
      * @return

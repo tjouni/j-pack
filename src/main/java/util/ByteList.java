@@ -1,7 +1,7 @@
 package util;
 
 /**
- * A dynamically sized list of bytes, implemented with a byte[] array
+ * A dynamically sized list of bytes, implemented as a byte[] array
  */
 public class ByteList {
     private byte[] array;
@@ -30,6 +30,9 @@ public class ByteList {
         position++;
     }
 
+    /**
+     * Double the size of the array
+     */
     private void grow() {
         byte[] newArray = new byte[size << 1];
 
@@ -60,6 +63,10 @@ public class ByteList {
         else return array[index];
     }
 
+    /**
+     * Return a concatenated byte array containing the same data as the original object
+     * @return
+     */
     public byte[] getArray() {
         byte[] concatArray = new byte[position];
         for (int i = 0; i < position; i++) {

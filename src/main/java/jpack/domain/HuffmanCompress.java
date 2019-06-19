@@ -11,7 +11,7 @@ public class HuffmanCompress {
     }
 
     /**
-     * Compress a ByteList object with Huffman coding
+     * Compress a byte array with Huffman coding
      *
      * @return
      */
@@ -44,7 +44,7 @@ public class HuffmanCompress {
     }
 
     /**
-     * Get frequencies for all bytes in a ByteList object
+     * Get frequencies for all bytes in a byte array
      *
      * @param bytes
      * @return int array indexed by byte value + 128, value is frequency
@@ -92,6 +92,10 @@ public class HuffmanCompress {
         }
     }
 
+    /**
+     * Write one byte header containing information about compression method (LZ77/non-LZ77) and last byte bits
+     * @param bits
+     */
     private void writeHeader(BitList bits) {
         byte b0 = (byte) (bits.getLastByteBits() | bits.getByte(0));
         bits.setByte(0, b0);

@@ -19,8 +19,8 @@ public class LZ77Decompress {
     /**
      * Decompress the LZ77 compressed file
      *
-     * @param compressedBits A ByteList representation of the compressed file
-     * @return a ByteList representation of the uncompressed file
+     * @param compressedBits A BitList representation of the compressed file
+     * @return a byte array representation of the uncompressed file
      */
     public byte[] decompress(BitList compressedBits) {
         ByteList fileBytes = new ByteList();
@@ -47,7 +47,7 @@ public class LZ77Decompress {
     }
 
     /**
-     * Read the header and the next WINDOW_SIZE bytes into a ByteList object
+     * Read the header and the next WINDOW_SIZE bytes and write into a ByteList object
      */
     private void readFileBeginning(BitList compressedBytes, ByteList decompressedBytes) {
         int originalFileLength = compressedBytes.readNextByte() << 24 | (compressedBytes.readNextByte() & 0xFF) << 16 | (compressedBytes.readNextByte() & 0xFF) << 8 | (compressedBytes.readNextByte() & 0xFF);

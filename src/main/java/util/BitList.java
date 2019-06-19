@@ -31,7 +31,7 @@ public class BitList {
     }
 
     /**
-     * Construct a new Bitlist object with a reference to a byte array for reading bits
+     * Construct a new Bitlist object with a reference to a byte array for reading/writing bits
      *
      * @param bytes
      */
@@ -41,6 +41,10 @@ public class BitList {
         writePosition = arraySize << 3;
     }
 
+    /**
+     * Read the next 8b at the current read position and return the byte value
+     * @return
+     */
     public byte readNextByte() {
         byte ret = 0;
         for (int i = 7; i >= 0; i--) {
@@ -51,6 +55,10 @@ public class BitList {
         return ret;
     }
 
+    /**
+     * Return the value of the next bit in the list
+     * @return
+     */
     public boolean readNextBit() {
         boolean b = read(readPosition);
         readPosition++;
@@ -104,6 +112,9 @@ public class BitList {
         }
     }
 
+    /**
+     * Double the array size
+     */
     private void grow() {
         byte[] newArray = new byte[arraySize << 1];
 
@@ -170,6 +181,7 @@ public class BitList {
     }
 
     /**
+     * Get the number of used bits in the last byte of the list
      * @return
      */
     public byte getLastByteBits() {

@@ -8,7 +8,7 @@ import java.nio.file.Files;
 public class FileIO {
 
     /**
-     * read a file into a byte array
+     * Read a file into a byte array
      *
      * @param filePath path to the file to be read
      * @return fileBytes a byte array representation of the file
