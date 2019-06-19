@@ -1,5 +1,7 @@
 # j-pack
 
+A Java application for compressing files with LZ77 and Huffman algorithms. A school project for an Algorithms and Data Structures course.
+
 
 ### Documentation
 
