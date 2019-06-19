@@ -31,30 +31,30 @@ Run .jar
  java -jar jpack.jar [arguments]
  ```
  
-arguments: [-hu *filename*] [-df *filename*] [-de *inputfile outputfile*]
+Arguments: [-hu *filename*] [-df *filename*] [-de *inputfile outputfile*]
 
 * hu       compress file using Huffman only
 * df       compress using LZ77 + Huffman
 * de       decompress a jpack compressed file
 
 
-####Build project
+#### Build project
  ```
  ./gradlew build
  ```
 
 
-####Generate jar from source code
+#### Generate jar from source code
  ```
  ./gradlew fatJar
  ```
  
-####Generate Javadoc
+#### Generate Javadoc
  ```
  ./gradlew javadoc
  ```
  
-####Generate Jacoco test report
+#### Generate Jacoco test report
  ```
  ./gradlew jacocoTestReport
  ```
