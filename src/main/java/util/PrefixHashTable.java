@@ -58,6 +58,25 @@ public class PrefixHashTable {
     }
 
     /**
+     * Find if hash table contains prefix with bytes b1 and b2. Used only for testing purposes
+     * @param b1
+     * @param b2
+     * @return
+     */
+    public boolean contains(byte b1, byte b2) {
+        Prefix prefix = new Prefix(b1,b2);
+        int bucket = prefix.hashCode() % M;
+        Prefix next = table[bucket];
+        while (next != null) {
+            if (next.getValue() == prefix.getValue()) {
+                return true;
+            }
+            next = next.getChild();
+        }
+        return false;
+    }
+
+    /**
      * Get block length for a prefix match
      * @param index
      * @param readPosition

@@ -5,7 +5,6 @@ package util;
  */
 public class HuffmanTree {
     private HuffmanNode root;
-    private short lengthInBits;
 
     /**
      * Construct a new Huffman code tree based on byte frequencies and count the number of bits needed
@@ -15,20 +14,16 @@ public class HuffmanTree {
      */
     public HuffmanTree(int[] frequencies) {
         MinimumHeap huffmanTrees = new MinimumHeap();
-        lengthInBits = 0;
         for (short i = 0; i < 256; i++) {
             if (frequencies[i] > 0) {
                 huffmanTrees.add(new HuffmanNode((byte) (i - 128), frequencies[i], null, null));
-                lengthInBits += 8;
             }
         }
         while (huffmanTrees.size() > 1) {
             HuffmanNode a = huffmanTrees.poll();
             HuffmanNode b = huffmanTrees.poll();
-            lengthInBits += 2;
             huffmanTrees.add(new HuffmanNode(null, a.getFrequency() + b.getFrequency(), a, b));
         }
-        lengthInBits++;
         this.root = huffmanTrees.poll();
     }
 
@@ -39,10 +34,6 @@ public class HuffmanTree {
      */
     public HuffmanNode getRoot() {
         return root;
-    }
-
-    public short getLengthInBits() {
-        return lengthInBits;
     }
 
     /**

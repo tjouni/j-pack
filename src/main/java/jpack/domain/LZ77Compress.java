@@ -6,7 +6,6 @@ import util.PrefixHashTable;
 public class LZ77Compress {
     private int lookaheadSize = 17;
     private int WINDOW_SIZE;
-    private PrefixHashTable hashTable;
 
     public LZ77Compress(int WINDOW_SIZE) {
         this.WINDOW_SIZE = WINDOW_SIZE;
@@ -21,9 +20,9 @@ public class LZ77Compress {
      */
     public byte[] compress(byte[] fileBytes) {
         int fileLength = fileBytes.length;
-        hashTable = new PrefixHashTable();
+        PrefixHashTable hashTable = new PrefixHashTable();
         BitList compressedBits = new BitList();
-        writeFileBeginning(fileBytes, compressedBits);
+        writeFileBeginning(fileBytes, compressedBits, hashTable);
 
         for (int readPosition = WINDOW_SIZE; readPosition < fileLength; readPosition++) {
             lookaheadSize = Math.min(lookaheadSize, fileLength - readPosition);
@@ -57,14 +56,14 @@ public class LZ77Compress {
      * Write the first 4 + WINDOW_SIZE bytes
      *
      * @param fileBytes
-     * @param compressedBytes
+     * @param compressedBits
      */
-    private void writeFileBeginning(byte[] fileBytes, BitList compressedBytes) {
+    private void writeFileBeginning(byte[] fileBytes, BitList compressedBits, PrefixHashTable hashTable) {
         int fileLength = fileBytes.length;
-        writeFileLength(fileLength, compressedBytes);
+        writeFileLength(fileLength, compressedBits);
         int stopIndex = Math.min(fileLength, WINDOW_SIZE);
         for (int readPosition = 0; readPosition < stopIndex; readPosition++) {
-            compressedBytes.writeByte(fileBytes[readPosition]);
+            compressedBits.writeByte(fileBytes[readPosition]);
             if (readPosition + 1 < stopIndex) {
                 hashTable.put(fileBytes[readPosition], fileBytes[readPosition + 1], readPosition);
             }
@@ -88,12 +87,12 @@ public class LZ77Compress {
      * Write the first 4 bytes (original file length in bytes)
      *
      * @param fileLength
-     * @param compressedBytes
+     * @param compressedBits
      */
-    private void writeFileLength(int fileLength, BitList compressedBytes) {
-        compressedBytes.writeByte((byte) (fileLength >> 24));
-        compressedBytes.writeByte((byte) (fileLength >> 16));
-        compressedBytes.writeByte((byte) (fileLength >> 8));
-        compressedBytes.writeByte((byte) (fileLength));
+    private void writeFileLength(int fileLength, BitList compressedBits) {
+        compressedBits.writeByte((byte) (fileLength >> 24));
+        compressedBits.writeByte((byte) (fileLength >> 16));
+        compressedBits.writeByte((byte) (fileLength >> 8));
+        compressedBits.writeByte((byte) (fileLength));
     }
 }

@@ -8,7 +8,6 @@ import util.HuffmanTree;
 public class HuffmanCompress {
 
     public HuffmanCompress() {
-
     }
 
     /**
@@ -16,29 +15,29 @@ public class HuffmanCompress {
      *
      * @return
      */
-    public byte[] compress(byte[] uncompressed, Boolean lz77) {
-        String[] codes = new String[256];
-
-        int[] frequencies = getFrequencies(uncompressed);
+    public byte[] compress(byte[] uncompressed, boolean lz77) {
         BitList huffmanBits = new BitList();
 
+        int[] frequencies = getFrequencies(uncompressed);
         HuffmanTree tree = new HuffmanTree(frequencies);
-
         HuffmanNode root = tree.getRoot();
-        String startCode = "";
+
         // Add extra node if only one byte value in uncompressed file
         if (root.isLeaf()) {
-            root = new HuffmanNode(null, 0, root, new HuffmanNode((byte)(root.getUncodedByte()-1), 0, null, null));
+            root = new HuffmanNode(null, 0, root, new HuffmanNode((byte) (root.getUncodedByte() - 1), 0, null, null));
         }
-        generateCodes(root, startCode, codes);
 
-        // Save space for header
+        String[] codes = new String[256];
+        generateCodes(root, "", codes);
+
+        // Save space for 8b header
         huffmanBits.add(lz77);
-        huffmanBits.writeByte((byte) 0);
+        for (int i = 0; i < 7; i++) {
+            huffmanBits.add(false);
+        }
 
         tree.write(huffmanBits, root);
         writeCompressedBits(huffmanBits, uncompressed, codes);
-
         writeHeader(huffmanBits);
 
         return huffmanBits.toByteArray();

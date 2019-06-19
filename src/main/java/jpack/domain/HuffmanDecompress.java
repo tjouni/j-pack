@@ -23,7 +23,7 @@ public class HuffmanDecompress {
 
         this.lz77 = huffmanBits.readNextBit();
         int lastByteBits = huffmanBytes[0] & 127;
-        huffmanBits.setReadPosition(9);
+        huffmanBits.setReadPosition(8);
 
         HuffmanNode root = readTree(huffmanBits);
 

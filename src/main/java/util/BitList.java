@@ -119,7 +119,6 @@ public class BitList {
      *
      * @param index
      * @param b
-     * @return
      */
     public void setByte(long index, byte b) {
         if (index > writePosition >> 3) {
@@ -128,6 +127,11 @@ public class BitList {
         bytes[(int) index] = b;
     }
 
+    /**
+     * Get byte at index
+     * @param index
+     * @return
+     */
     public byte getByte(int index) {
         if (index > writePosition >> 3) {
             throw new IndexOutOfBoundsException("BitList index: " + index + " out of bounds [0," + writePosition / 8 + ")");

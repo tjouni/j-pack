@@ -16,9 +16,11 @@ public class Main {
      */
     private static final int WINDOW_SIZE = 4096;
 
+    /**
+     * Call methods according to args or print error message
+     * @param args
+     */
     public static void main(String[] args) {
-
-
         try {
             FileIO fileIO = new FileIO();
             String argString = args[0];
@@ -49,6 +51,14 @@ public class Main {
         }
     }
 
+    /**
+     * Launch compression according to args
+     * @param fileBytes
+     * @param fileString
+     * @param lz77
+     * @param fileIO
+     * @throws IOException
+     */
     private static void compress(byte[] fileBytes, String fileString, boolean lz77, FileIO fileIO) throws IOException {
         System.out.println("original file size: " + fileBytes.length + "B");
 
@@ -87,6 +97,13 @@ public class Main {
         fileIO.writeFileBytes(fileString, huffmanBytes);
     }
 
+    /**
+     * Launch decompression according to args
+     * @param fileBytes
+     * @param outputFileString
+     * @param fileIO
+     * @throws Exception
+     */
     private static void decompress(byte[] fileBytes, String outputFileString, FileIO fileIO) throws Exception {
         Long decompressionStartTime = System.currentTimeMillis();
 
