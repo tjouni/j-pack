@@ -22,7 +22,7 @@ Gradlea joutui opiskelemaan, jotta sai raportit ja javadocit tehtyä.
 
 ### Mikä jäi epäselväksi tai tuottanut vaikeuksia?
 
--
+Ei mikään.
 
 ### Mitä teen seuraavaksi?
 
