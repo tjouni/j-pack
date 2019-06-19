@@ -21,8 +21,14 @@
 
 ### Usage
 
+Run from source code
  ```
  ./gradlew run --args='arguments'
+ ```
+ 
+Run .jar
+ ```
+ java -jar jpack.jar [arguments]
  ```
  
 arguments: [-hu *filename*] [-df *filename*] [-de *inputfile outputfile*]
@@ -30,3 +36,26 @@ arguments: [-hu *filename*] [-df *filename*] [-de *inputfile outputfile*]
 * hu       compress file using Huffman only
 * df       compress using LZ77 + Huffman
 * de       decompress a jpack compressed file
+
+
+Build project
+ ```
+ ./gradlew build
+ ```
+
+
+Generate jar from source code
+ ```
+ ./gradlew fatJar
+ ```
+ 
+Generate javadoc
+ ```
+ ./gradlew javadoc
+ ```
+ 
+Generate Jacoco test report
+```
+./gradlew jacocoTestReport
+
+
