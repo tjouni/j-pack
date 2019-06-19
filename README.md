@@ -38,24 +38,24 @@ arguments: [-hu *filename*] [-df *filename*] [-de *inputfile outputfile*]
 * de       decompress a jpack compressed file
 
 
-Build project
+####Build project
  ```
  ./gradlew build
  ```
 
 
-Generate jar from source code
+####Generate jar from source code
  ```
  ./gradlew fatJar
  ```
  
-Generate javadoc
+####Generate Javadoc
  ```
  ./gradlew javadoc
  ```
  
-Generate Jacoco test report
-```
-./gradlew jacocoTestReport
-
+####Generate Jacoco test report
+ ```
+ ./gradlew jacocoTestReport
+ ```
 
