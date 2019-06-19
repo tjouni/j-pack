@@ -6,7 +6,7 @@ LZ77 is currently implemented with a lookback window of size 4096 and a lookahea
 
 #### Prefix hash table
 
-A hash table is used to search for prefixes. Each bucket of the table contains a singly-linked list of prefixes and new prefixes are added to the front of the list. If linear search for a prefix finds a prefix outside the lookback window, the list is cut to minimize memory usage.
+A hash table is used to search for prefixes. Each bucket of the table contains a singly-linked list of prefixes and new prefixes are added to the front of the list. If linear search for a prefix finds any prefix outside the lookback window, the list is cut to minimize memory usage.
 
 ### Huffman codes
 
