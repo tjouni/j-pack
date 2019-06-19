@@ -6,7 +6,7 @@ LZ77 is currently implemented with a lookback window of size 4096 and a lookahea
 
 #### Prefix hash table
 
-A hash table is used to search for prefixes. Each bucket of the table contains a singly-linked list of prefixes and new prefixes are added to the front of the list. If linear search for a prefix finds a prefix outside the lookback window, the list is cut to minimize memory usage.
+A hash table is used to search for prefixes. Each bucket of the table contains a singly-linked list of prefixes and new prefixes are added to the front of the list. If linear search for a prefix finds any prefix outside the lookback window, the list is cut to minimize memory usage.
 
 ### Huffman codes
 
@@ -23,3 +23,7 @@ Minimum heap is implemented as an array of fixed size of 4095 starting at index 
 ### BitList and ByteList
 
 BitList and ByteList are dynamically sized arrays of bits and bytes that allow writing and reading of bits and bytes. Both can be converted to a concatenated byte array.
+
+### IO
+
+All IO operations use Java standard library functionality. All compression and and decompression operations are done in memory and the whole file is read and written to memory at once.
