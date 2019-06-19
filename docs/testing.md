@@ -28,7 +28,10 @@ Project testing is currently done by unit tests and manual compression tests of 
       * Prefix searching is tested by integration tests through LZ77CompressTest and DeflateTest classes
     * Prefix tests
       * Test prefix 16b values for different combinations of two bytes
-    
+      
+#### Jacoco coverage report
+
+<img src="https://raw.githubusercontent.com/tjouni/j-pack/master/docs/jacoco.png">
   
   
 ### Manual testing
