@@ -129,6 +129,7 @@ public class BitList {
 
     /**
      * Get byte at index
+     *
      * @param index
      * @return
      */

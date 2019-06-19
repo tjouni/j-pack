@@ -18,6 +18,7 @@ public class Main {
 
     /**
      * Call methods according to args or print error message
+     *
      * @param args
      */
     public static void main(String[] args) {
@@ -53,6 +54,7 @@ public class Main {
 
     /**
      * Launch compression according to args
+     *
      * @param fileBytes
      * @param fileString
      * @param lz77
@@ -99,6 +101,7 @@ public class Main {
 
     /**
      * Launch decompression according to args
+     *
      * @param fileBytes
      * @param outputFileString
      * @param fileIO

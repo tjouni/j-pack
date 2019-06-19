@@ -18,6 +18,7 @@ public class MinimumHeap {
 
     /**
      * Add a new node to heap, move up to satisfy the heap property
+     *
      * @param node
      */
     public void add(HuffmanNode node) {
@@ -27,7 +28,32 @@ public class MinimumHeap {
     }
 
     /**
+     * Move node at index i up in the heap to the correct position
+     *
+     * @param i
+     */
+    private void moveUp(int i) {
+        while (i > 1 && heap[i].compareTo(heap[i / 2]) < 0) {
+            swap(i, i / 2);
+            i /= 2;
+        }
+    }
+
+    /**
+     * Swap nodes at index a and b
+     *
+     * @param a
+     * @param b
+     */
+    private void swap(int a, int b) {
+        HuffmanNode temp = heap[a];
+        heap[a] = heap[b];
+        heap[b] = temp;
+    }
+
+    /**
      * Remove and return the minimum node in the heap
+     *
      * @return
      */
     public HuffmanNode poll() {
@@ -39,18 +65,8 @@ public class MinimumHeap {
     }
 
     /**
-     * Move node at index i up in the heap to the correct position
-     * @param i
-     */
-    private void moveUp(int i) {
-        while (i > 1 && heap[i].compareTo(heap[i / 2]) < 0) {
-            swap(i, i / 2);
-            i /= 2;
-        }
-    }
-
-    /**
      * Move node at index i down in the heap to the correct position
+     *
      * @param i
      */
     private void moveDown(int i) {
@@ -64,18 +80,8 @@ public class MinimumHeap {
     }
 
     /**
-     * Swap nodes at index a and b
-     * @param a
-     * @param b
-     */
-    private void swap(int a, int b) {
-        HuffmanNode temp = heap[a];
-        heap[a] = heap[b];
-        heap[b] = temp;
-    }
-
-    /**
      * Return the number of nodes in the heap
+     *
      * @return
      */
     public int size() {

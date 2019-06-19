@@ -3,7 +3,7 @@ package util;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class MinimumHeapTest {
     private MinimumHeap queue;
@@ -35,7 +35,7 @@ public class MinimumHeapTest {
     @Test
     public void pollTest2() {
         for (int i = 0; i < 4095; i++) {
-            queue.add(new HuffmanNode((byte) i, 4095-i, null, null));
+            queue.add(new HuffmanNode((byte) i, 4095 - i, null, null));
         }
         for (int i = 1; i <= 4095; i++) {
             assertEquals(i, queue.poll().getFrequency());

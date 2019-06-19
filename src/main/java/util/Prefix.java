@@ -10,6 +10,7 @@ public class Prefix {
 
     /**
      * Construct a new Prefix object with b1 and b2 combined to a short as a value
+     *
      * @param b1
      * @param b2
      * @param index
@@ -32,24 +33,25 @@ public class Prefix {
 
     /**
      * Compute a hash code for prefix from value
+     *
      * @return
      */
     @Override
     public int hashCode() {
         int hash = this.value;
-        hash = (hash^0xdeadbeef) + (hash<<4);
-        hash = hash ^ (hash>>10);
-        hash = hash + (hash<<7);
-        hash = hash ^ (hash>>13);
+        hash = (hash ^ 0xdeadbeef) + (hash << 4);
+        hash = hash ^ (hash >> 10);
+        hash = hash + (hash << 7);
+        hash = hash ^ (hash >> 13);
         return hash;
-    }
-
-    public void setChild(Prefix child) {
-        this.child = child;
     }
 
     public Prefix getChild() {
         return child;
+    }
+
+    public void setChild(Prefix child) {
+        this.child = child;
     }
 
     public int getIndex() {

@@ -42,7 +42,7 @@ public class HuffmanDecompressTest {
         HuffmanDecompress testDecompress = new HuffmanDecompress();
         byte[] testList = new byte[1000000];
         for (int i = 0; i < 1000000; i++) {
-            testList[i] = (byte) (i%64);
+            testList[i] = (byte) (i % 64);
         }
         byte[] compressedArray = testCompress.compress(testList, false);
         byte[] decompressedList = testDecompress.decompress(compressedArray);
