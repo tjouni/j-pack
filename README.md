@@ -6,6 +6,7 @@
   * [Project definition](https://github.com/tjouni/j-pack/blob/master/docs/definition.md)
   * [Implementation document](https://github.com/tjouni/j-pack/blob/master/docs/implementation.md)
   * [Testing document](https://github.com/tjouni/j-pack/blob/master/docs/testing.md)
+  * [Javadoc](https://tjouni.github.io/j-pack-javadoc/)
 
 
 ### Weekly reports (in Finnish)
@@ -20,12 +21,41 @@
 
 ### Usage
 
+Run from source code
  ```
  ./gradlew run --args='arguments'
  ```
  
-arguments: [-hu *filename*] [-df *filename*] [-de *inputfile outputfile*]
+Run .jar
+ ```
+ java -jar jpack.jar [arguments]
+ ```
+ 
+Arguments: [-hu *filename*] [-df *filename*] [-de *inputfile outputfile*]
 
 * hu       compress file using Huffman only
 * df       compress using LZ77 + Huffman
 * de       decompress a jpack compressed file
+
+
+#### Build project
+ ```
+ ./gradlew build
+ ```
+
+
+#### Generate jar from source code
+ ```
+ ./gradlew fatJar
+ ```
+ 
+#### Generate Javadoc
+ ```
+ ./gradlew javadoc
+ ```
+ 
+#### Generate Jacoco test report
+ ```
+ ./gradlew jacocoTestReport
+ ```
+
