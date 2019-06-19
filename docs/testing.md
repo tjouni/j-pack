@@ -13,14 +13,22 @@ Project testing is currently done by unit tests and manual compression tests of 
   * Deflate compression and decompression test
     * Test a combination of LZ77+Huffman
   * Data structures tests
-    * ByteList tests
-      * Test all functions of the dynamically sized byte array
     * BitList tests
       * Test all functions of the dynamically sized bit array
+    * ByteList tests
+      * Test all functions of the dynamically sized byte array
     * HuffmanNode tests
       * Test all functions of the HuffmanNode class
     * HuffmanTree tests
       * Test that different types of trees built are of the correct form for a few different types of trees
+    * MinimumHeap tests
+      * Test all functions of the heap priority queue implementation
+    * PrefixHashTable tests
+      * Unit tests for asserting that inserted objects can be found in the table
+      * Prefix searching is tested by integration tests through LZ77CompressTest and DeflateTest classes
+    * Prefix tests
+      * Test prefix 16b values for different combinations of two bytes
+    
   
   
 ### Manual testing
@@ -28,6 +36,8 @@ Project testing is currently done by unit tests and manual compression tests of 
   * Application gives compression ratio and elapsed time figures when used. These numbers are used to test which optimizations give better time/compression performance.
 
 #### The Canterbury Corpus
+
+Compression and decompression times are averages of 10 measurements. Testing done on a 2017 MacBook Pro with 2,3 GHz Intel Core i5 and 8GB memory.
 
 ##### Huffman coding only performance figures
 
