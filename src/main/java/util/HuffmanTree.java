@@ -7,8 +7,7 @@ public class HuffmanTree {
     private HuffmanNode root;
 
     /**
-     * Construct a new Huffman code tree based on byte frequencies and count the number of bits needed
-     * for representation in a file.
+     * Construct a new Huffman code tree based on byte frequencies
      *
      * @param frequencies indexed by byte+128
      */
