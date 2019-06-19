@@ -6,6 +6,7 @@
   * [Project definition](https://github.com/tjouni/j-pack/blob/master/docs/definition.md)
   * [Implementation document](https://github.com/tjouni/j-pack/blob/master/docs/implementation.md)
   * [Testing document](https://github.com/tjouni/j-pack/blob/master/docs/testing.md)
+  * [Javadoc](http://htmlpreview.github.com/?https://raw.githubusercontent.com/tjouni/j-pack/master/docs/javadoc/index.html)
 
 
 ### Weekly reports (in Finnish)
