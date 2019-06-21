@@ -22,7 +22,7 @@ Minimum heap is implemented as an array of fixed size of 4095 starting at index 
 
 ### BitList and ByteList
 
-BitList and ByteList are dynamically sized arrays of bits and bytes that allow writing and reading of bits and bytes. Both can be converted to a concatenated byte array.
+BitList and ByteList are dynamically sized arrays of bits and bytes that allow writing and reading of bits and bytes. Both can be converted to a byte array that is the same size as the original object.
 
 ### IO
 
