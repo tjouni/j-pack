@@ -64,14 +64,14 @@ public class ByteList {
     }
 
     /**
-     * Return a concatenated byte array containing the same data as the original object
+     * Return a byte array containing the same data as the original object
      * @return
      */
     public byte[] getArray() {
-        byte[] concatArray = new byte[position];
+        byte[] newArray = new byte[position];
         for (int i = 0; i < position; i++) {
-            concatArray[i] = array[i];
+            newArray[i] = array[i];
         }
-        return concatArray;
+        return newArray;
     }
 }
