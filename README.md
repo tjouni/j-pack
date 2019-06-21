@@ -19,6 +19,12 @@ A Java application for compressing files with LZ77 and Huffman algorithms. A sch
   * [Viikko 4](https://github.com/tjouni/j-pack/blob/master/docs/viikkoraportti4.md)
   * [Viikko 5](https://github.com/tjouni/j-pack/blob/master/docs/viikkoraportti5.md)
   * [Viikko 6](https://github.com/tjouni/j-pack/blob/master/docs/viikkoraportti6.md)
+  * [Viikko 7](https://github.com/tjouni/j-pack/blob/master/docs/viikkoraportti7.md)
+  
+  
+### Releases
+
+  * [v1.0](https://github.com/tjouni/j-pack/releases/tag/v1.0)
 
 
 ### Usage
